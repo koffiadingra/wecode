@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 10px; */
+    background-color: white;
+}
+
+.ga, .dr {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo1 {
+    width: 50px;
+    margin-left: 50px;
+    position: relative;
+}
+
+.logo2 {
+    margin-right: 15px;
+}
+
+.button {
+    font-size: 15px;
+    padding: 10px 15px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer; 
+}
+
+/* .button:hover {
+    background-color: azure;
+} */
+
+.dr img {
+    width: 25px; 
+    height: auto;
+    margin-left: 5px;
+}
+.bas{
+    position:absolute;
+    bottom: 0%;
+    height: 92%;
+    cursor: pointer;
+}
+.trait{
+    position: absolute;
+    margin-left: 150px; 
+    cursor: pointer;
+    text-align: start;
+}
