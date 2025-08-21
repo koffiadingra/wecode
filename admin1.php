@@ -60,9 +60,9 @@ $userCount = $userManager->getUserCount();
         }
         
         /* Dégradés personnalisés */
-        .from-primary {
+        /* .from-primary {
             background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(280, 100%, 45%) 100%);
-        }
+        } */
         
         .to-primary {
             background-image: linear-gradient(135deg, hsl(200, 100%, 45%) 0%, hsl(var(--primary)) 100%);
