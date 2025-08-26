@@ -7,7 +7,7 @@ export const useTodoStore = defineStore('todo', () => {
   const error = ref('')
   const filter = ref('all')
 
-  
+
   const filteredTodos = computed(() => {
     if (filter.value === 'active') return todos.value.filter(t => !t.completed)
     if (filter.value === 'completed') return todos.value.filter(t => t.completed)
@@ -16,7 +16,7 @@ export const useTodoStore = defineStore('todo', () => {
 
   const remaining = computed(() => todos.value.filter(t => !t.completed).length)
 
-  
+
   const fetchTodos = async () => {
     loading.value = true
     error.value = ''
@@ -27,12 +27,8 @@ export const useTodoStore = defineStore('todo', () => {
 
       if (!Array.isArray(data)) throw new Error('Format API inattendu')
 
-      todos.value = data.map(t => ({
-        _id: t.tirrid ?? t.id, // <-- utilise tirrid si dispo, sinon id
-        title: t.title,
-        content: t.content,
-        completed: t.completed ?? false,
-      }))
+      todos.value = data.notes;
+
     } catch (err) {
       error.value = err.message
     } finally {
@@ -52,10 +48,10 @@ export const useTodoStore = defineStore('todo', () => {
       const saved = await res.json()
 
       todos.value.unshift({
-        _id: saved.tirrid ?? saved.id,
+        _id: saved,
         title: saved.title,
-        content: saved.content,
-        completed: saved.completed ?? false,
+        content: saved.c
+        completed: saved
       })
     } catch (err) {
       error.value = err.message
@@ -121,7 +117,7 @@ export const useTodoStore = defineStore('todo', () => {
     filter.value = type
   }
 
-  
+
   return {
     todos,
     filteredTodos,
