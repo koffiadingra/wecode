@@ -1,57 +1,49 @@
-<!-- RegistrationPage.vue -->
+<template>
+  <form @submit.prevent="handleSubmit">
+    <div>
+      <label for="username">name :</label>
+      <input type="text" id="username" v-model="username" required />
+    </div>
+    <div>
+      <label for="email">Email :</label>
+      <input type="email" id="email" v-model="email" required />
+    </div>
+    <div>
+      <label for="password">password :</label>
+      <input type="password" id="password" v-model="password" required />
+    </div>
+    <!-- <div>
+      <label for="password">confirm_password :</label>
+      <input type="password" id="password"  required />
+    </div> -->
+    <button type="submit" :disabled="authStore.loading">
+      {{ authStore.loading ? 'Enregistrement...' : 'Enregistrer' }}
+    </button>
+    <p v-if="authStore.error" style="color: red;">{{ authStore.error }}</p>
+    <!-- <p v-else style="color: green;">register succefull</p> -->
+  </form>
+</template>
+
 <script setup>
 import { ref } from 'vue';
-import { useAuthStore } from '../stores/Users.js';
-import { useRouter } from 'vue-router';
-
+import { useAuthStore } from '@/stores/Users';
 const authStore = useAuthStore();
-const router = useRouter();
-
+const username = ref('');
 const email = ref('');
 const password = ref('');
-const confirmPassword = ref('');
+// const confirm_password = ref('');
 
-const handleRegister = async () => {
-  if (password.value !== confirmPassword.value) {
-    authStore.error = 'Passwords do not match.';
-    return;
-  }
-
-  const success = await authStore.register({
-    email: email.value,
-    password: password.value,
-  });
-
-  if (success) {
-    router.push('/dashboard');
+const handleSubmit = async () => {
+  try {
+    await authStore.register({
+      username: username.value,
+      email: email.value,
+      password: password.value,
+      // confirm_password:confirm_password.value,
+    });
+    alert('Utilisateur enregistré avec succès !');
+  } catch (e) {
+    console.error('Erreur dans le composant formulaire:', e);
   }
 };
 </script>
-
-<template>
-  <div>
-    <h1>Register</h1>
-    <form @submit.prevent="handleRegister">
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" v-model="email" required />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required />
-      </div>
-      <div>
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" v-model="confirmPassword" required />
-      </div>
-      <button type="submit" :disabled="authStore.loading">
-        {{ authStore.loading ? 'Registering...' : 'Register' }}
-      </button>
-      <p v-if="authStore.error" style="color: red;">{{ authStore.error }}</p>
-    </form>
-  </div>
-</template>
-
-<!-- <style scoped>
-/* Add your component-specific styles here */
-</style> -->

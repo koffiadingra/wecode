@@ -57,6 +57,7 @@ export const useContactStore = defineStore('contacts', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
+              
             },
             body: JSON.stringify(contact),
           });
