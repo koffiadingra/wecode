@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    
+
     async login(credentials) {
       this.loading = true;
       this.error = null;
@@ -78,7 +78,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    
+
     async updateUser(updatedData) {
       if (!this.token) {
         this.error = "Non authentifié";
@@ -88,7 +88,7 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true;
       this.error = null;
       try {
-        const response = await fetch(`https://api-contact.epi-bluelock.bj/api/users/${this.user?.id}`, {
+        const response = await fetch(`https://api-contact.epi-bluelock.bj/api/users/me/${this.user?.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export const useAuthStore = defineStore('auth', {
         const data = await response.json();
         this.user = { ...this.user, ...data.user };
         localStorage.setItem('authUser', JSON.stringify(this.user));
-        console.log('Profil mis à jour ✅');
+        console.log('Profil mis à jour ');
         return data;
       } catch (error) {
         this.error = error.message;
@@ -116,7 +116,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    
+
     logout() {
       this.user = null;
       this.token = null;
@@ -126,7 +126,7 @@ export const useAuthStore = defineStore('auth', {
       console.log('Déconnexion réussie ');
     },
 
-    
+
     initializeAuth() {
       const token = localStorage.getItem('authToken');
       const user = localStorage.getItem('authUser');

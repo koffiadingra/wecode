@@ -1,14 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+// import HomeView from '../views/HomeView.vue'
+import Test_loginV from '@/views/Test_loginV.vue'
+import myContactV from '@/views/MyContactV.vue'
+import RegisterV from '@/views/Test _registerV.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: HomeView,
+    // },
     {
       path: '/Dashboard',
       name: 'Dashboard',
@@ -20,7 +23,17 @@ const router = createRouter({
     {
       path: '/Register',
       name: 'Register',
-      component: () => import('@/components/RegisterV.vue'),
+      component: RegisterV,
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Test_loginV,
+    },
+    {
+      path: '/myContact',
+      name: 'myContact',
+      component: myContactV,
     },
 
   ],

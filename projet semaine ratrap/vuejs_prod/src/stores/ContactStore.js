@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
-import { useAuthStore } from './auth';
+import { useAuthStore } from './Users';
 
 export const useContactStore = defineStore('contacts', {
   state: () => ({
     contacts: [],
     isLoading: false,
     error: null,
-    newContact: { firstname: '', lastname: '', phone: '', email: '' },
+    newContact: { firstname: '', lastname: '', phone: '', email: '' ,gender: ''},
   }),
 
   actions: {
@@ -20,8 +20,11 @@ export const useContactStore = defineStore('contacts', {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await fetch('/api/contacts', {
-          headers: { 'Authorization': `Bearer ${authStore.token}` },
+        const response = await fetch('https://api-contact.epi-bluelock.bj/api/contacts?page=1&perPage=all&order=desc', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authStore.token}`
+          },
         });
 
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -43,7 +46,7 @@ export const useContactStore = defineStore('contacts', {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await fetch('/api/contacts', {
+        const response = await fetch('https://api-contact.epi-bluelock.bj/api/contacts', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -59,8 +62,7 @@ export const useContactStore = defineStore('contacts', {
 
         const newContact = await response.json();
         this.contacts.push(newContact);
-        this.newContact = { firstname: '', lastname: '', phone: '', email: '' }; // reset form
-
+        this.newContact = { firstname: '', lastname: '', phone: '', email: '' };
       } catch (error) {
         this.error = error.message;
       } finally {
@@ -68,7 +70,7 @@ export const useContactStore = defineStore('contacts', {
       }
     },
 
-  
+
     async updateContact(contact) {
       const authStore = useAuthStore();
       if (!authStore.isAuthenticated) {
@@ -79,7 +81,7 @@ export const useContactStore = defineStore('contacts', {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await fetch(`/api/contacts/${contact.id}`, {
+        const response = await fetch(`https://api-contact.epi-bluelock.bj/api/contacts/${contact.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +106,7 @@ export const useContactStore = defineStore('contacts', {
       }
     },
 
-    
+
     async deleteContact(contactId) {
       const authStore = useAuthStore();
       if (!authStore.isAuthenticated) {
@@ -115,7 +117,7 @@ export const useContactStore = defineStore('contacts', {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await fetch(`/api/contacts/${contactId}`, {
+        const response = await fetch(`https://api-contact.epi-bluelock.bj/api/contacts/${contactId}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${authStore.token}` },
         });
