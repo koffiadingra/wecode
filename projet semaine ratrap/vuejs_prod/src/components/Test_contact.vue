@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, computed } from 'vue';
-import { useContactStore } from '@/stores/Contactstrore';
+import { useContactStore } from '@/stores/ContactStrore';
 import { useAuthStore } from '@/stores/Users';
 import { useRouter } from 'vue-router';
 
