@@ -1,98 +1,142 @@
 import { defineStore } from 'pinia';
+import { useAuthStore } from './auth';
 
 export const useContactStore = defineStore('contacts', {
   state: () => ({
-  contacts: [],
-  isLoading: false,
-  error: null,
-  newContact : {firstname: '',lastname:'', phone: '',email:''},
+    contacts: [],
+    isLoading: false,
+    error: null,
+    newContact: { firstname: '', lastname: '', phone: '', email: '' },
   }),
-  // getters: {
-  //   getAllContacts: (state) => state.contacts,
-  //   getContactById: (state) => (id) => state.contacts.find(contact => contact.id === id),
-  //     },
-    actions: {
-      async fetchContacts() {
+
+  actions: {
+    async fetchContacts() {
+      const authStore = useAuthStore();
+      if (!authStore.isAuthenticated) {
+        this.error = "Veuillez vous connecter pour accéder aux contacts.";
+        return;
+      }
+
       this.isLoading = true;
       this.error = null;
       try {
-      const response = await fetch('/api/contacts');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      this.contacts = await response.json();
+        const response = await fetch('/api/contacts', {
+          headers: { 'Authorization': `Bearer ${authStore.token}` },
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        this.contacts = await response.json();
       } catch (error) {
-            this.error = error;
+        this.error = error.message;
       } finally {
-            this.isLoading = false;
-      }
-      },
-      async addContact(newContact) {
-      this.isLoading = true;
-      this.error = null;
-      try{
-      const response = await fetch('https://api.example.com/data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newContact),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      this.contacts.push(data);
-      }catch(error){
-        this.error = error;
-      }finally{
         this.isLoading = false;
       }
-      },
-      async updateContact(contact) {
-        this.loading = true;
-        this.error = null;
-        try {
-          const response = await fetch(`/api/contacts/${contact.id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              
-            },
-            body: JSON.stringify(contact),
-          });
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data = await response.json();
-          const index = this.contacts.findIndex(c => c.id === data.id);
-          if (index !== -1) {
-            this.contacts[index] = data;
-          }
-        } catch (error) {
-          this.error = error.message;
-        } finally {
-          this.loading = false;
-        }
-      },
-      async deleteContact(contactId) {
-        this.isLoading = true;
-        this.error = null;
-        try{
-          const response = await fetch(``,{
-            method: 'DELETE',
-            headers : {
-              'content-Type' : 'application/json',
-            }
-          });
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          console.log(`Contact with ID ${contactId} deleted successfully.`);
-          alert('delete succefull')
-        }catch(error){
-          this.error = error.message;
-        }
-      },
     },
+
+    async addContact(contactData) {
+      const authStore = useAuthStore();
+      if (!authStore.isAuthenticated) {
+        this.error = "Veuillez vous connecter pour ajouter un contact.";
+        return;
+      }
+
+      this.isLoading = true;
+      this.error = null;
+      try {
+        const response = await fetch('/api/contacts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authStore.token}`,
+          },
+          body: JSON.stringify(contactData),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        }
+
+        const newContact = await response.json();
+        this.contacts.push(newContact);
+        this.newContact = { firstname: '', lastname: '', phone: '', email: '' }; // reset form
+
+      } catch (error) {
+        this.error = error.message;
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+  
+    async updateContact(contact) {
+      const authStore = useAuthStore();
+      if (!authStore.isAuthenticated) {
+        this.error = "Veuillez vous connecter pour modifier un contact.";
+        return;
+      }
+
+      this.isLoading = true;
+      this.error = null;
+      try {
+        const response = await fetch(`/api/contacts/${contact.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authStore.token}`,
+          },
+          body: JSON.stringify(contact),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        }
+
+        const updatedContact = await response.json();
+        const index = this.contacts.findIndex(c => c.id === updatedContact.id);
+        if (index !== -1) this.contacts[index] = updatedContact;
+
+      } catch (error) {
+        this.error = error.message;
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    
+    async deleteContact(contactId) {
+      const authStore = useAuthStore();
+      if (!authStore.isAuthenticated) {
+        this.error = "Veuillez vous connecter pour supprimer un contact.";
+        return;
+      }
+
+      this.isLoading = true;
+      this.error = null;
+      try {
+        const response = await fetch(`/api/contacts/${contactId}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${authStore.token}` },
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        this.contacts = this.contacts.filter(c => c.id !== contactId);
+        alert('Contact supprimé avec succès ');
+
+      } catch (error) {
+        this.error = error.message;
+      } finally {
+        this.isLoading = false;
+      }
+    },
+  },
+
+  getters: {
+    getAllContacts: (state) => state.contacts,
+    getContactById: (state) => (id) => state.contacts.find(contact => contact.id === id),
+    getLoading: (state) => state.isLoading,
+    getError: (state) => state.error,
+  },
 });
