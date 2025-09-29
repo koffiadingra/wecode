@@ -12,7 +12,7 @@ onMounted(() => {
   if (authStore.isAuthenticated) {
     contactStore.fetchContacts()
   } else {
-    router.push('/login')
+    router.push({path:'/Login'})
   }
 })
 

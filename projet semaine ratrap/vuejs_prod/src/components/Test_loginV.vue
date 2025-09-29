@@ -11,7 +11,7 @@ const credentials = reactive({ email: '', password: '' });
 const onLogin = async () => {
   try {
     await authStore.login(credentials);
-    router.push('/Dashboard');
+    router.push({path:'/Dashboard'});
   } catch (err) {
     alert(authStore.getError);
   }

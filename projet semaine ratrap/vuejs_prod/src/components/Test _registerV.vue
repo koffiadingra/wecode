@@ -16,8 +16,8 @@ const form = reactive({
 const onSubmit = async () => {
   try {
     await authStore.register(form);
-    alert('Inscription réussie ! Veuillez vous connecter.');
-    router.push('/Login');
+    alert('Registration successful! Please log in.');
+    router.push({path:'/Login'});
   } catch (err) {
     alert(authStore.getError);
   }
