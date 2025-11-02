@@ -28,6 +28,13 @@ const Navbar = () => {
                     <a href=""
                     className="btn btn-sm btn-ghost"
                     >
+                        Mes compétences
+                    </a>
+                </li>
+                <li>
+                    <a href=""
+                    className="btn btn-sm btn-ghost"
+                    >
                         Mes experiences
                     </a>
                 </li>
@@ -36,6 +43,13 @@ const Navbar = () => {
                     className="btn btn-sm btn-ghost"
                     >
                         Mes projets
+                    </a>
+                </li>
+                <li>
+                    <a href=""
+                    className="btn btn-sm btn-ghost"
+                    >
+                        mes contacts
                     </a>
                 </li>
             </ul>

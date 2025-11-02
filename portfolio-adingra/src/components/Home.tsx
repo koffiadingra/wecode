@@ -1,5 +1,5 @@
 import {Mail} from "lucide-react"
-
+// import moi from "src\assets\moi.jpg";
 const Home = () => {
     return (
         <>
@@ -13,10 +13,14 @@ const Home = () => {
                     <Mail />
                     contactez-moi
                 </a>
+                <p className="btn btn-accent md:w-fit ">telechearger un resumé cv</p>
             </div>
             
             <div>
-
+                <img src="src\assets\moi.jpg" alt="moi" className="w-96 h-96 object-cover border-8 border-accent shadow-xl"
+                style={{
+                    borderRadius : "30%"
+                }}/>
             </div>
         </div>
         </>
