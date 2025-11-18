@@ -65,7 +65,7 @@ export function About() {
             <div className="relative glass rounded-3xl p-4 glow-purple">
               <div className="aspect-square rounded-2xl overflow-hidden holographic">
                 <ImageWithFallback
-                  src="/src/assets/1763398165966.png"
+                  src="/public/images/1763398165966.png"
                   alt="ADINGRA Koffi"
                   className="w-full h-full object-cover"
                 />
