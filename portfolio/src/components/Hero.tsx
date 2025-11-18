@@ -56,7 +56,7 @@ export function Hero() {
             <div className="relative glass rounded-full p-2 glow-blue">
               <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-cyan-400/30 holographic">
                 <ImageWithFallback
-                  src="/public/images/1763398165966.png"
+                  src="/src/assets/1763398165966.png"
                   alt="ADINGRA Koffi Jean Emmanuel Martial"
                   className="w-full h-full object-cover"
                 />
