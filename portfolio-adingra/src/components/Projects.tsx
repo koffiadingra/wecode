@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { ExternalLink, Github, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from './ui/button';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "./ui/button";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function Projects() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -10,52 +10,100 @@ export function Projects() {
 
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'Plateforme e-commerce moderne avec panier intelligent, système de paiement intégré et gestion des stocks en temps réel.',
-      image: 'https://images.unsplash.com/photo-1658297063569-162817482fb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBwbGF0Zm9ybXxlbnwxfHx8fDE3NjMzMTQ4ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-      technologies: ['React', 'Next.js', 'TailwindCSS', 'Laravel', 'MySQL'],
-      color: 'from-cyan-500 to-blue-600',
+      title: "Plateforme de Notation Films & Séries",
+      description:
+        "Application complète de critique et notation de films/séries, avec fiches détaillées, système de votes et interactions utilisateur.",
+      image:
+        "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: [
+        "Next.js",
+        "TailwindCSS",
+        "Node.js",
+        "API REST",
+        "mongoDB",
+      ],
+      color: "from-purple-500 to-indigo-600",
     },
     {
-      title: 'Dashboard Analytics',
-      description: 'Tableau de bord analytique avec visualisation de données en temps réel, graphiques interactifs et rapports personnalisés.',
-      image: 'https://images.unsplash.com/photo-1608222351212-18fe0ec7b13b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MXx8fHwxNzYzMzcwOTU4fDA&ixlib=rb-4.1.0&q=80&w=1080',
-      technologies: ['Vue.js', 'Flask', 'PostgreSQL', 'Chart.js'],
-      color: 'from-purple-500 to-pink-600',
+      title: "Plateforme d'Achat & Réservation de Tickets",
+      description:
+        "Backend complet pour une plateforme de concerts et événements : gestion des modules, endpoints, logique métier et APIs connectées au frontend Vue.js.",
+      image:
+        "https://images.unsplash.com/photo-1518972559570-7cc1309f3229?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: ["NestJS", "TailwindCSS", "Vue.js", "mongoDB"],
+      color: "from-yellow-500 to-amber-600",
     },
     {
-      title: 'Mobile Banking App',
-      description: 'Application bancaire mobile sécurisée avec authentification biométrique, transferts instantanés et gestion de budget.',
-      image: 'https://images.unsplash.com/photo-1609921212029-bb5a28e60960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXNpZ258ZW58MXx8fHwxNzYzMzg1MTkxfDA&ixlib=rb-4.1.0&q=80&w=1080',
-      technologies: ['React Native', 'NestJS', 'MongoDB', 'Redis'],
-      color: 'from-green-500 to-emerald-600',
+      title: "Application de Gestion des Tâches (Type Trello)",
+      description:
+        "Développement backend dédié au système de commentaires, intégration avec WordPress et mise en place des interactions frontend en Vue.js.",
+      image:
+        "https://images.unsplash.com/photo-1587614382346-4ec70d6ab5b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: ["WordPress", "Vue.js", "TailwindCSS"],
+      color: "from-blue-500 to-sky-600",
+    },
+
+    {
+      title: "Plateforme de Centralisation de Commentaires",
+      description:
+        "Développement backend complet pour la gestion des utilisateurs, centralisation multi-plateforme des commentaires et création du frontend en Vue.js avec intégration Laravel.",
+      image:
+        "https://images.unsplash.com/photo-1581092334564-1e7d1f5f7f39?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: ["Laravel", "TailwindCSS", "Vue.js", "MySQL"],
+      color: "from-red-500 to-rose-600",
+    },
+
+    {
+      title: "FREEADS — Plateforme de Petites Annonces",
+      description:
+        "Site de publication d'annonces gratuites (Laravel) : inscription/validation par e-mail, CRUD annonces (photo, prix, localisation), recherche et filtres (catégorie, lieu, fourchette de prix), pages annonces et tableau de bord utilisateur.",
+      image:
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: ["Laravel", "Vue.js", "MySQL", "TailwindCSS"],
+      color: "from-emerald-500 to-green-600",
     },
     {
-      title: 'Web Application Portal',
-      description: 'Portail web entreprise avec gestion des utilisateurs, workflow automatisé et intégration multi-services.',
-      image: 'https://images.unsplash.com/photo-1762330915249-cd1155571a67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3ZWIlMjBhcHBsaWNhdGlvbnxlbnwxfHx8fDE3NjMzNTYzMDV8MA&ixlib=rb-4.1.0&q=80&w=1080',
-      technologies: ['Next.js', 'Laravel', 'TailwindCSS', 'MySQL'],
-      color: 'from-orange-500 to-red-600',
+      title: "Integration — Template HTML/CSS",
+      description:
+        "Intégration complète d'un template Desktop puis Mobile en HTML5/CSS3 conforme W3C, optimisation SEO (Lighthouse), importation des polices Avenir & Roboto, interface construite avec Grid Layout et visuels temporaires.",
+      image:
+        "https://images.unsplash.com/photo-1559027615-ce3d9af3e6ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: ["HTML5", "CSS3", "Responsive Design", "SEO"],
+      color: "from-gray-600 to-slate-700",
     },
     {
-      title: 'API Microservices',
-      description: 'Architecture microservices scalable avec API REST/GraphQL, authentification JWT et documentation interactive.',
-      image: 'https://images.unsplash.com/photo-1623820866259-3ae2f2c3bb87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGklMjBzeXN0ZW0lMjBhcmNoaXRlY3R1cmV8ZW58MXx8fHwxNzYzMzk3NDA1fDA&ixlib=rb-4.1.0&q=80&w=1080',
-      technologies: ['NestJS', 'PostgreSQL', 'Docker', 'Redis'],
-      color: 'from-blue-500 to-indigo-600',
+      title: "Redditech — Mobile Browsing App for Reddit",
+      description:
+        "Application mobile de navigation Reddit (role : Software Architect / Mobile Developer). Intégration OAuth2 (Authorization Code), affichage du profil utilisateur, navigation des subreddits abonnés, recherche et affichage des subreddits, filtres de posts, gestion des listings/pagination et UI/UX polie selon les bonnes pratiques du framework choisi.",
+      image:
+        "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: ["React Native ", "OAuth2", "Vuex"],
+      color: "from-red-500 to-rose-600",
     },
     {
-      title: 'Social Media Platform',
-      description: 'Réseau social moderne avec fil d\'actualité en temps réel, messagerie instantanée et partage multimédia.',
-      image: 'https://images.unsplash.com/photo-1762330915249-cd1155571a67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3ZWIlMjBhcHBsaWNhdGlvbnxlbnwxfHx8fDE3NjMzNTYzMDV8MA&ixlib=rb-4.1.0&q=80&w=1080',
-      technologies: ['React', 'Flask', 'WebSocket', 'MongoDB'],
-      color: 'from-pink-500 to-rose-600',
+      title: "My Show Time — Booking Platform (NestJS & MongoDB)",
+      description:
+        "Développement backend complet d'une plateforme de réservation de concerts/festivals en NestJS et MongoDB : gestion utilisateurs, système de réservation avec QR code, favoris, filtres avancés et panneau d’administration pour gérer concerts, comptes et statistiques.",
+      image:
+        "https://images.unsplash.com/photo-1506157786151-b8491531f063?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: [
+        "NestJS",
+        "Node.js",
+        "MongoDB",
+        "Mongoose",
+        "JWT",
+        "WebSockets",
+      ],
+      color: "from-purple-600 to-indigo-700",
     },
   ];
 
   const totalPages = Math.ceil(projects.length / projectsPerPage);
   const startIndex = currentPage * projectsPerPage;
-  const currentProjects = projects.slice(startIndex, startIndex + projectsPerPage);
+  const currentProjects = projects.slice(
+    startIndex,
+    startIndex + projectsPerPage
+  );
 
   const nextPage = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
@@ -66,7 +114,10 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="min-h-screen py-20 relative overflow-hidden">
+    <section
+      id="projects"
+      className="min-h-screen py-20 relative overflow-hidden"
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 grid-bg opacity-10"></div>
 
@@ -81,7 +132,8 @@ export function Projects() {
           <h2 className="text-4xl md:text-6xl neon-purple mb-4">Mes Projets</h2>
           <div className="h-1 w-32 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto rounded-full"></div>
           <p className="mt-6 text-gray-400 max-w-2xl mx-auto">
-            Une sélection de projets démontrant mon expertise technique et ma créativité
+            Une sélection de projets démontrant mon expertise technique et ma
+            créativité
           </p>
         </motion.div>
 
@@ -113,7 +165,9 @@ export function Projects() {
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className={`absolute top-4 right-4 w-16 h-16 bg-gradient-to-br ${project.color} rounded-xl opacity-80 blur-xl`}></div>
+                    <div
+                      className={`absolute top-4 right-4 w-16 h-16 bg-gradient-to-br ${project.color} rounded-xl opacity-80 blur-xl`}
+                    ></div>
                   </div>
 
                   {/* Project Content */}
@@ -152,6 +206,7 @@ export function Projects() {
                         className="border-purple-500/50 hover:bg-purple-500/10"
                       >
                         <Github className="w-4 h-4" />
+                        <a href="https://github.com/EpitechCodingAcademyPromo2025"></a>
                       </Button>
                     </div>
                   </div>
@@ -179,8 +234,8 @@ export function Projects() {
                 onClick={() => setCurrentPage(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentPage
-                    ? 'bg-gradient-to-r from-cyan-500 to-purple-600 w-8'
-                    : 'bg-white/20 hover:bg-white/40'
+                    ? "bg-gradient-to-r from-cyan-500 to-purple-600 w-8"
+                    : "bg-white/20 hover:bg-white/40"
                 }`}
               />
             ))}
@@ -203,7 +258,8 @@ export function Projects() {
           viewport={{ once: true }}
           className="text-center mt-8 text-gray-400"
         >
-          Page {currentPage + 1} sur {totalPages} • {projects.length} projets au total
+          Page {currentPage + 1} sur {totalPages} • {projects.length} projets au
+          total
         </motion.div>
       </div>
     </section>
