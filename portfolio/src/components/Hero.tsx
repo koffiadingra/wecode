@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { ChevronDown, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+// import { image } from "@/assets/1763398165966.png";
 
 export function Hero() {
   return (
