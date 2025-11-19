@@ -24,7 +24,7 @@ export function Contact() {
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "https://cvdesignr.com/p/691b374deade2";
+    link.href = "https://cvdesignr.com/p/0laOMmeqn6MgyM8";
     link.download = "cv adingra koffi jean emmanuel martial";
     document.body.appendChild(link);
     link.click();
