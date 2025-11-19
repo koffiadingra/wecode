@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import { Code2, Database, Layout, Smartphone, Server, Cpu } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import React from 'react';
+// import { portrait } from '@/assets/1763398165966.png';
 
 export function About() {
   const techStack = [
@@ -65,7 +67,7 @@ export function About() {
             <div className="relative glass rounded-3xl p-4 glow-purple">
               <div className="aspect-square rounded-2xl overflow-hidden holographic">
                 <ImageWithFallback
-                  src="/src/assets/1763398165966.png"
+                  src="/src/assets/portrait.png"
                   alt="ADINGRA Koffi"
                   className="w-full h-full object-cover"
                 />
