@@ -1,50 +1,54 @@
-import { motion } from 'motion/react';
-import { Code2, Database, Layout, Smartphone, Server, Cpu } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import React from 'react';
+import { motion } from "motion/react";
+import { Code2, Database, Layout, Smartphone, Server, Cpu } from "lucide-react";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+import React from "react";
 // import { portrait } from '@/assets/1763398165966.png';
 
 export function About() {
   const techStack = [
-    { name: 'Python (Flask)', icon: '🐍', color: 'from-yellow-500 to-blue-500' },
-    { name: 'PHP (Laravel)', icon: '🐘', color: 'from-red-500 to-orange-500' },
-    { name: 'Vue.js', icon: '💚', color: 'from-green-400 to-emerald-600' },
-    { name: 'NestJS', icon: '🔺', color: 'from-red-600 to-pink-500' },
-    { name: 'ReactJS', icon: '⚛️', color: 'from-cyan-400 to-blue-500' },
-    { name: 'React Native', icon: '📱', color: 'from-blue-400 to-purple-500' },
-    { name: 'Next.js', icon: '▲', color: 'from-gray-800 to-gray-600' },
-    { name: 'TailwindCSS', icon: '💨', color: 'from-cyan-300 to-blue-400' },
-    { name: 'HTML5 & CSS3', icon: '🎨', color: 'from-orange-500 to-red-500' },
-    { name: 'Rust', icon: '🦀', color: 'from-orange-600 to-red-700' },
+    {
+      name: "Python (Flask)",
+      icon: "🐍",
+      color: "from-yellow-500 to-blue-500",
+    },
+    { name: "PHP (Laravel)", icon: "🐘", color: "from-red-500 to-orange-500" },
+    { name: "Vue.js", icon: "💚", color: "from-green-400 to-emerald-600" },
+    { name: "NestJS", icon: "🔺", color: "from-red-600 to-pink-500" },
+    { name: "ReactJS", icon: "⚛️", color: "from-cyan-400 to-blue-500" },
+    { name: "React Native", icon: "📱", color: "from-blue-400 to-purple-500" },
+    { name: "Next.js", icon: "▲", color: "from-gray-800 to-gray-600" },
+    { name: "TailwindCSS", icon: "💨", color: "from-cyan-300 to-blue-400" },
+    { name: "HTML5 & CSS3", icon: "🎨", color: "from-orange-500 to-red-500" },
+    { name: "Rust", icon: "🦀", color: "from-orange-600 to-red-700" },
   ];
 
   const categories = [
-    { 
-      title: 'Frontend', 
-      icon: Layout, 
-      skills: ['Vue.js', 'ReactJS', 'Next.js', 'TailwindCSS', 'HTML5 & CSS3']
+    {
+      title: "Frontend",
+      icon: Layout,
+      skills: ["Vue.js", "ReactJS", "Next.js", "TailwindCSS", "HTML5 & CSS3"],
     },
-    { 
-      title: 'Backend', 
-      icon: Server, 
-      skills: ['Python (Flask)', 'PHP (Laravel)', 'NestJS']
+    {
+      title: "Backend",
+      icon: Server,
+      skills: ["Python (Flask)", "PHP (Laravel)", "NestJS"],
     },
-    { 
-      title: 'Mobile', 
-      icon: Smartphone, 
-      skills: ['React Native']
+    {
+      title: "Mobile",
+      icon: Smartphone,
+      skills: ["React Native"],
     },
-    { 
-      title: 'Systèmes', 
-      icon: Cpu, 
-      skills: ['Rust']
+    {
+      title: "Systèmes",
+      icon: Cpu,
+      skills: ["Rust"],
     },
   ];
 
   return (
     <section id="about" className="min-h-screen py-20 relative overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-10"></div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,7 +56,9 @@ export function About() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl neon-purple mb-4">À Propos de Moi</h2>
+          <h2 className="text-4xl md:text-6xl neon-purple mb-4">
+            À Propos de Moi
+          </h2>
           <div className="h-1 w-32 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto rounded-full"></div>
         </motion.div>
 
@@ -67,8 +73,8 @@ export function About() {
             <div className="relative glass rounded-3xl p-4 glow-purple">
               <div className="aspect-square rounded-2xl overflow-hidden holographic">
                 <ImageWithFallback
-                  src="/public/portrait_converted.jpg"
-                  alt="ADINGRA Koffi"
+                  src="/portrait.svg"
+                  alt="ADINGRA Koffi Jean Emmanuel Martial"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -87,7 +93,11 @@ export function About() {
                 ADINGRA Koffi Jean Emmanuel Martial
               </h3>
               <p className="text-gray-300 leading-relaxed mb-6">
-                Je suis un développeur full-stack passionné, spécialisé dans la création d'applications modernes, performantes et scalables. Mon expertise couvre l'ensemble de la stack technologique, du frontend au backend, en passant par le développement mobile et les systèmes bas niveau.
+                Je suis un développeur full-stack passionné, spécialisé dans la
+                création d'applications modernes, performantes et scalables. Mon
+                expertise couvre l'ensemble de la stack technologique, du
+                frontend au backend, en passant par le développement mobile et
+                les systèmes bas niveau.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="glass px-4 py-2 rounded-full text-sm text-cyan-400 border border-cyan-500/30">
@@ -111,7 +121,9 @@ export function About() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h3 className="text-3xl text-center mb-12 text-cyan-400">Stack Technologique</h3>
+          <h3 className="text-3xl text-center mb-12 text-cyan-400">
+            Stack Technologique
+          </h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {techStack.map((tech, index) => (
               <motion.div
@@ -123,10 +135,14 @@ export function About() {
                 transition={{ delay: index * 0.05 }}
                 className="glass rounded-xl p-6 text-center holographic group cursor-pointer"
               >
-                <div className={`text-4xl md:text-5xl mb-3 group-hover:scale-125 transition-transform`}>
+                <div
+                  className={`text-4xl md:text-5xl mb-3 group-hover:scale-125 transition-transform`}
+                >
                   {tech.icon}
                 </div>
-                <div className={`text-sm bg-gradient-to-r ${tech.color} bg-clip-text text-transparent`}>
+                <div
+                  className={`text-sm bg-gradient-to-r ${tech.color} bg-clip-text text-transparent`}
+                >
                   {tech.name}
                 </div>
               </motion.div>
@@ -153,7 +169,10 @@ export function About() {
               </div>
               <ul className="space-y-2">
                 {category.skills.map((skill) => (
-                  <li key={skill} className="text-gray-300 flex items-center space-x-2">
+                  <li
+                    key={skill}
+                    className="text-gray-300 flex items-center space-x-2"
+                  >
                     <div className="w-2 h-2 rounded-full bg-purple-500"></div>
                     <span>{skill}</span>
                   </li>
