@@ -1,0 +1,18 @@
+{
+    get: 'players/profiles', parameters: {…}, errors: Array(0), results: 1, paging: {…}, …} errors : [] get : "players/profiles" paging : {current: 1, total: 1} parameters : {search: 'Cristiano Ronaldo'}
+    
+     response : Array(1)
+     
+      0 : player :
+        age : 40 birth : {date: '1985-02-05', place: 'Funchal', country: 'Portugal'} 
+        firstname : "Cristiano Ronaldo"
+        height : "187" 
+        id : 874 
+        lastname : "dos Santos Aveiro" 
+        name : "Cristiano Ronaldo" 
+        nationality : "Portugal" 
+        number : 7 
+        photo : "https://media.api-sports.io/football/players/874.png" 
+        position : "Attacker" 
+        weight : "83" 
+        [[Prototype]] : Object [[Prototype]] : Object length : 1 [[Prototype]] : Array(0) results : 1 [[Prototype]] :
