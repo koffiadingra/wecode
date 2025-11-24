@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./api_laravel
+    container_name: laravel-backend
+    volumes:
+      - ./api_laravel:/var/www
+      - /var/www/vendor
+    networks:
+      - app-network
+
+  artisan:
+    build: ./api_laravel
+    container_name: laravel-artisan
+    volumes:
+      - ./api_laravel:/var/www
+    working_dir: /var/www
+    entrypoint: ["php", "artisan"]
+    networks:
+      - app-network
+
+  frontend:
+    build: ./ct_comment_front_nd
+    container_name: vue-frontend
+    volumes:
+      - ./ct_comment_front_nd:/app
+      - /app/node_modules
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-server
+    ports:
+      - "${APP_PORT:-80}:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./api_laravel:/var/www
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  db_data:

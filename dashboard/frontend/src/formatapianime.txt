@@ -1,0 +1,49 @@
+Résultat API: { data: Array(1),
+meta: { … } } data: Array(1) 0: alternativeTitles: (11) ["Death Note Director's Cut: The Complete Ending Edition Special", 'Death Note Special', 'Genshisuru Kami', 'Visions of a God', 'L o Tsugu Mono', "L's Successors", 'ディレクターズカット完全決着版 〜リライト', 'Death Note: Relight', 'Death Note: Relight', 'Death Note Relight: La Visión de un Dios', 'Death Note: Relight'] episodes: 2 genres: (2) ['Supernatural', 'Suspense'] hasEpisode: true hasRanking: true image: "https://cdn.myanimelist.net/images/anime/13/8518.jpg"
+link
+: 
+"https://myanimelist.net/anime/2994/Death_Note__Rewrite"
+ranking
+: 
+1272
+status
+: 
+"Finished Airing"
+synopsis
+: 
+"When approached by a fellow death god tempted to visit the human realm, Ryuk recounts his own journey to the other side and the story of Light Yagami—a brilliant young man who impressed him there. \n\nOne day at school, Light stumbles upon Ryuk's lost Death Note and realizes it is not an ordinary notebook. He learns that it has the ability to kill every person whose name is written inside, provided that the user can visualize the victim's face. Having long deplored the decadence of current society, Light believes this sinister weapon offers him an unexpected opportunity: to eradicate all evil and bring about a new ideal world.\n\nFollowing a string of fatal heart attacks, the authorities start to suspect that the alarming number of dead criminals is not coincidental. Determined to uncover the mysterious culprit, they join forces with L, an internationally renowned detective. As the death count escalates, Light and L clash in a breathtaking confrontation of wits and deception—a duel that will decide the future of humanity.\n\n[Written by MAL Rewrite]"
+thumb
+: 
+"https://cdn.myanimelist.net/r/50x70/images/anime/13/8518.jpg?s=5635b5da41555166832be5996b511f59"
+title
+: 
+"Death Note: Rewrite"
+type
+: 
+"Special"
+_id
+: 
+"2994"
+[[Prototype]]
+: 
+Object
+length
+: 
+1
+[[Prototype]]
+: 
+Array(0)
+meta
+: 
+page
+: 
+1
+size
+: 
+1
+totalData
+: 
+69
+totalPage
+: 
+69
