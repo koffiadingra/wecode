@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Newspaper, Calendar, User } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Badge } from './ui/badge';
 import { Card } from './ui/card';
-import { projectId, publicAnonKey } from '../utils/supabase/info';
 
 interface News {
   id: string;
@@ -69,42 +68,12 @@ const categoryColors: { [key: string]: string } = {
 };
 
 export function Actualites() {
-  const [news, setNews] = useState<News[]>(defaultNews);
   const [selectedCategory, setSelectedCategory] = useState<string>('Tous');
 
-  useEffect(() => {
-    loadNews();
-  }, []);
-
-  const loadNews = async () => {
-    try {
-      const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-08451ed6/news`,
-        {
-          headers: {
-            Authorization: `Bearer ${publicAnonKey}`,
-          },
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.news && data.news.length > 0) {
-          setNews(data.news.sort((a: News, b: News) => 
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          ));
-        }
-      }
-    } catch (err) {
-      console.error('Load news error:', err);
-      // Keep default news if loading fails
-    }
-  };
-
-  const categories = ['Tous', ...new Set(news.map(n => n.category))];
+  const categories = ['Tous', ...new Set(defaultNews.map(n => n.category))];
   const filteredNews = selectedCategory === 'Tous' 
-    ? news 
-    : news.filter(n => n.category === selectedCategory);
+    ? defaultNews 
+    : defaultNews.filter(n => n.category === selectedCategory);
 
   return (
     <section id="actualites" className="py-20 bg-neutral-50">
