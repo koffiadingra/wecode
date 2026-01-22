@@ -10,29 +10,38 @@ export function Projects() {
 
   const projects = [
     {
+      title: "touts les projets",
+      description:
+        "",
+      image:
+        "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png",
+      technologies: [],
+      color: "from-purple-500 to-indigo-600",
+      link: "",
+      github: "https://github.com/koffiadingra/wecode/tree/dev",
+    },
+    {
       title: "Plateforme de Notation Films & Séries",
       description:
         "Application complète de critique et notation de films/séries, avec fiches détaillées, système de votes et interactions utilisateur.",
       image:
         "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      technologies: [
-        "Next.js",
-        "TailwindCSS",
-        "Node.js",
-        "API REST",
-        "mongoDB",
-      ],
+      technologies: ["Next.js", "TailwindCSS", "Node.js", "API REST", "mongoDB"],
       color: "from-purple-500 to-indigo-600",
+      link: "https://test-brox.vercel.app/",
+      github: "https://github.com/koffiadingra/wecode/tree/dev/rotten_tomatoes/rotten_tomatoes",
     },
-    {
-      title: "Plateforme d'Achat & Réservation de Tickets",
-      description:
-        "Backend complet pour une plateforme de concerts et événements : gestion des modules, endpoints, logique métier et APIs connectées au frontend Vue.js.",
-      image:
-        "https://images.unsplash.com/photo-1518972559570-7cc1309f3229?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      technologies: ["NestJS", "TailwindCSS", "Vue.js", "mongoDB"],
-      color: "from-yellow-500 to-amber-600",
-    },
+    // {
+    //   title: "Plateforme d'Achat & Réservation de Tickets",
+    //   description:
+    //     "Backend complet pour une plateforme de concerts et événements : gestion des modules, endpoints, logique métier et APIs connectées au frontend Vue.js.",
+    //   image:
+    //     "https://images.unsplash.com/photo-1518972559570-7cc1309f3229?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    //   technologies: ["NestJS", "TailwindCSS", "Vue.js", "mongoDB"],
+    //   color: "from-yellow-500 to-amber-600",
+    //   link: "#",
+    //   github: "#",
+    // },
     {
       title: "Application de Gestion des Tâches (Type Trello)",
       description:
@@ -41,8 +50,20 @@ export function Projects() {
         "https://images.unsplash.com/photo-1587614382346-4ec70d6ab5b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       technologies: ["WordPress", "Vue.js", "TailwindCSS"],
       color: "from-blue-500 to-sky-600",
+      link: "https://my-trello-vert.vercel.app/",
+      github: "https://github.com/koffiadingra/wecode/tree/dev/trello",
     },
-
+    {
+      title: "My Show Time — Booking Platform (NestJS & MongoDB)",
+      description:
+        "Développement backend complet d'une plateforme de réservation de concerts/festivals en NestJS et MongoDB : gestion utilisateurs, système de réservation avec QR code, favoris, filtres avancés et panneau d’administration pour gérer concerts, comptes et statistiques.",
+      image:
+        "https://images.unsplash.com/photo-1506157786151-b8491531f063?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: ["NestJS", "Node.js", "MongoDB", "Mongoose", "JWT", "WebSockets"],
+      color: "from-purple-600 to-indigo-700",
+      link: "https://my-show-time.onrender.com/",
+      github: "https://github.com/koffiadingra/wecode/tree/dev/my-show-time/my-show-time",
+    },
     {
       title: "Plateforme de Centralisation de Commentaires",
       description:
@@ -51,8 +72,9 @@ export function Projects() {
         "https://images.unsplash.com/photo-1581092334564-1e7d1f5f7f39?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       technologies: ["Laravel", "TailwindCSS", "Vue.js", "MySQL"],
       color: "from-red-500 to-rose-600",
+      link: "#",
+      github: "https://github.com/koffiadingra/wecode/tree/dev/yowl/YOWL",
     },
-
     {
       title: "FREEADS — Plateforme de Petites Annonces",
       description:
@@ -61,15 +83,8 @@ export function Projects() {
         "https://images.unsplash.com/photo-1523275335684-37898b6baf30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       technologies: ["Laravel", "Vue.js", "MySQL", "TailwindCSS"],
       color: "from-emerald-500 to-green-600",
-    },
-    {
-      title: "Integration — Template HTML/CSS",
-      description:
-        "Intégration complète d'un template Desktop puis Mobile en HTML5/CSS3 conforme W3C, optimisation SEO (Lighthouse), importation des polices Avenir & Roboto, interface construite avec Grid Layout et visuels temporaires.",
-      image:
-        "https://images.unsplash.com/photo-1559027615-ce3d9af3e6ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      technologies: ["HTML5", "CSS3", "Responsive Design", "SEO"],
-      color: "from-gray-600 to-slate-700",
+      link: "#",
+      github: "https://github.com/koffiadingra/wecode/tree/dev/freeads/freeads",
     },
     {
       title: "Redditech — Mobile Browsing App for Reddit",
@@ -79,50 +94,34 @@ export function Projects() {
         "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       technologies: ["React Native ", "OAuth2", "Vuex"],
       color: "from-red-500 to-rose-600",
+      link: "#",
+      github: "https://github.com/koffiadingra/wecode/tree/dev/reditech_trello/Redditech_Mobil",
     },
     {
-      title: "My Show Time — Booking Platform (NestJS & MongoDB)",
+      title: "Integration — Template HTML/CSS",
       description:
-        "Développement backend complet d'une plateforme de réservation de concerts/festivals en NestJS et MongoDB : gestion utilisateurs, système de réservation avec QR code, favoris, filtres avancés et panneau d’administration pour gérer concerts, comptes et statistiques.",
+        "Intégration complète d'un template Desktop puis Mobile en HTML5/CSS3 conforme W3C, optimisation SEO (Lighthouse), importation des polices Avenir & Roboto, interface construite avec Grid Layout et visuels temporaires.",
       image:
-        "https://images.unsplash.com/photo-1506157786151-b8491531f063?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      technologies: [
-        "NestJS",
-        "Node.js",
-        "MongoDB",
-        "Mongoose",
-        "JWT",
-        "WebSockets",
-      ],
-      color: "from-purple-600 to-indigo-700",
+        "https://images.unsplash.com/photo-1559027615-ce3d9af3e6ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      technologies: ["HTML5", "CSS3", "Responsive Design", "SEO"],
+      color: "from-gray-600 to-slate-700",
+      link: "#",
+      github: "https://github.com/koffiadingra/wecode/tree/dev/integration",
     },
   ];
 
   const totalPages = Math.ceil(projects.length / projectsPerPage);
   const startIndex = currentPage * projectsPerPage;
-  const currentProjects = projects.slice(
-    startIndex,
-    startIndex + projectsPerPage
-  );
+  const currentProjects = projects.slice(startIndex, startIndex + projectsPerPage);
 
-  const nextPage = () => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
-  };
-
-  const prevPage = () => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
-  };
+  const nextPage = () => setCurrentPage((prev) => (prev + 1) % totalPages);
+  const prevPage = () => setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
 
   return (
-    <section
-      id="projects"
-      className="min-h-screen py-20 relative overflow-hidden"
-    >
-      {/* Background Effects */}
+    <section id="projects" className="min-h-screen py-20 relative overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-10"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -132,8 +131,7 @@ export function Projects() {
           <h2 className="text-4xl md:text-6xl neon-purple mb-4">Mes Projets</h2>
           <div className="h-1 w-32 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto rounded-full"></div>
           <p className="mt-6 text-gray-400 max-w-2xl mx-auto">
-            Une sélection de projets démontrant mon expertise technique et ma
-            créativité
+            Une sélection de projets démontrant mon expertise technique et ma créativité
           </p>
         </motion.div>
 
@@ -155,7 +153,7 @@ export function Projects() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -10, rotateY: 5 }}
-                  className="glass rounded-2xl overflow-hidden holographic group cursor-pointer"
+                  className="glass rounded-2xl overflow-hidden holographic group"
                 >
                   {/* Project Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -175,11 +173,8 @@ export function Projects() {
                     <h3 className="text-xl mb-3 text-cyan-400 group-hover:text-purple-400 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-gray-400 mb-4 line-clamp-3">
-                      {project.description}
-                    </p>
+                    <p className="text-gray-400 mb-4 line-clamp-3">{project.description}</p>
 
-                    {/* Technologies */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.technologies.map((tech) => (
                         <span
@@ -191,23 +186,31 @@ export function Projects() {
                       ))}
                     </div>
 
-                    {/* Action Buttons */}
                     <div className="flex gap-3">
                       <Button
                         size="sm"
                         className={`flex-1 bg-gradient-to-r ${project.color} hover:opacity-80`}
+                        asChild
                       >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Voir
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Voir
+                        </a>
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="border-purple-500/50 hover:bg-purple-500/10"
-                      >
-                        <Github className="w-4 h-4" />
-                        <a href="https://github.com/EpitechCodingAcademyPromo2025"></a>
-                      </Button>
+
+                      {project.github && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-purple-500/50 hover:bg-purple-500/10"
+                          asChild
+                        >
+                          <a href={project.github} target="_blank" rel="noopener noreferrer">
+                            <Github className="w-4 h-4 mr-2" />
+                            GitHub
+                          </a>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -232,11 +235,10 @@ export function Projects() {
               <button
                 key={index}
                 onClick={() => setCurrentPage(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentPage
+                className={`w-3 h-3 rounded-full transition-all ${index === currentPage
                     ? "bg-gradient-to-r from-cyan-500 to-purple-600 w-8"
                     : "bg-white/20 hover:bg-white/40"
-                }`}
+                  }`}
               />
             ))}
           </div>
@@ -251,15 +253,13 @@ export function Projects() {
           </Button>
         </div>
 
-        {/* Project Counter */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-center mt-8 text-gray-400"
         >
-          Page {currentPage + 1} sur {totalPages} • {projects.length} projets au
-          total
+          Page {currentPage + 1} sur {totalPages} • {projects.length} projets au total
         </motion.div>
       </div>
     </section>

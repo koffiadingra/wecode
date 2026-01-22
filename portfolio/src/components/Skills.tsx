@@ -1,5 +1,31 @@
 import { motion } from 'motion/react';
-import { Code2, Palette, Database, Smartphone, Globe, Zap } from 'lucide-react';
+import { Palette, Database, Smartphone, Zap, Server, Cloud } from 'lucide-react';
+import {
+  FaVuejs,
+  FaReact,
+  FaPhp,
+  FaPython,
+  FaJava,
+  FaRust,
+  FaHtml5,
+  FaCss3Alt,
+  FaDatabase
+} from 'react-icons/fa';
+import {
+  SiNestjs,
+  SiSpringboot,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiC,
+  SiReact,
+  SiMongodb,
+  SiMysql,
+  SiSqlite,
+  SiFirebase,
+  SiAppwrite,
+  SiCloudinary,
+  SiSupabase
+} from 'react-icons/si';
 
 export function Skills() {
   const skillsData = [
@@ -8,56 +34,82 @@ export function Skills() {
       icon: Palette,
       color: 'from-cyan-400 to-blue-600',
       skills: [
-        { name: 'Vue.js', level: 98 },
-        { name: 'ReactJS', level: 95 },
-        { name: 'Next.js', level: 88 },
-        { name: 'TailwindCSS', level: 92 },
-        { name: 'HTML5 & CSS3', level: 95 },
-      ]
+        { name: 'Vue.js', level: 98, icon: <FaVuejs className="w-5 h-5 mr-2 text-green-500" /> },
+        { name: 'ReactJS & TypeScript', level: 95, icon: <FaReact className="w-5 h-5 mr-2 text-cyan-400" /> },
+        { name: 'Next.js', level: 88, icon: <SiNextdotjs className="w-5 h-5 mr-2 text-white" /> },
+        { name: 'TailwindCSS', level: 92, icon: <SiTailwindcss className="w-5 h-5 mr-2 text-cyan-300" /> },
+        {
+          name: 'HTML5 & CSS3',
+          level: 95,
+          icon: (
+            <>
+              <FaHtml5 className="w-5 h-5 mr-1 text-orange-500" />
+              <FaCss3Alt className="w-5 h-5 mr-2 text-blue-500" />
+            </>
+          ),
+        },
+      ],
     },
+
     {
       category: 'Backend Development',
-      icon: Database,
+      icon: Server,
       color: 'from-purple-400 to-pink-600',
       skills: [
-        { name: 'Python (Flask)', level: 85 },
-        { name: 'PHP (Laravel)', level: 90 },
-        { name: 'NestJS', level: 89 },
-      ]
+        { name: 'Python (Flask)', level: 85, icon: <FaPython className="w-5 h-5 mr-2 text-yellow-400" /> },
+        { name: 'PHP (Laravel)', level: 90, icon: <FaPhp className="w-5 h-5 mr-2 text-purple-500" /> },
+        { name: 'NestJS', level: 89, icon: <SiNestjs className="w-5 h-5 mr-2 text-red-500" /> },
+        { name: 'Java (Spring Boot)', level: 82, icon: <FaJava className="w-5 h-5 mr-2 text-red-600" /> },
+        { name: 'Spring Boot', level: 80, icon: <SiSpringboot className="w-5 h-5 mr-2 text-green-600" /> },
+      ],
     },
+
+    {
+      category: 'Bases de Données',
+      icon: Database,
+      color: 'from-emerald-400 to-green-600',
+      skills: [
+        { name: 'MongoDB', level: 88, icon: <SiMongodb className="w-5 h-5 mr-2 text-green-500" /> },
+        { name: 'MySQL', level: 85, icon: <SiMysql className="w-5 h-5 mr-2 text-blue-500" /> },
+        { name: 'SQLite', level: 75, icon: <SiSqlite className="w-5 h-5 mr-2 text-gray-400" /> },
+      ],
+    },
+
     {
       category: 'Mobile Development',
       icon: Smartphone,
       color: 'from-green-400 to-emerald-600',
       skills: [
-        { name: 'React Native', level: 93 },
-      ]
+        { name: 'React Native', level: 93, icon: <SiReact className="w-5 h-5 mr-2 text-blue-400" /> },
+      ],
     },
+
     {
       category: 'System Programming',
       icon: Zap,
       color: 'from-orange-400 to-red-600',
       skills: [
-        { name: 'Rust', level: 60 },
-      ]
+        { name: 'Rust', level: 60, icon: <FaRust className="w-5 h-5 mr-2 text-orange-500" /> },
+        { name: 'C', level: 70, icon: <SiC className="w-5 h-5 mr-2 text-blue-500" /> },
+      ],
+    },
+
+    {
+      category: 'Outils & Services',
+      icon: Cloud,
+      color: 'from-sky-400 to-indigo-600',
+      skills: [
+        { name: 'Firebase', level: 85, icon: <SiFirebase className="w-5 h-5 mr-2 text-yellow-500" /> },
+        { name: 'Appwrite', level: 80, icon: <SiAppwrite className="w-5 h-5 mr-2 text-pink-500" /> },
+        { name: 'Cloudinary', level: 78, icon: <SiCloudinary className="w-5 h-5 mr-2 text-blue-400" /> },
+        { name: 'Supabase', level: 82, icon: <SiSupabase className="w-5 h-5 mr-2 text-emerald-400" /> },
+      ],
     },
   ];
 
   return (
     <section id="skills" className="min-h-screen py-20 relative overflow-hidden">
-      <div className="absolute inset-0 grid-bg opacity-10"></div>
-      <motion.div
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.2, 0.3, 0.2],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute top-1/4 right-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"
-      />
+      <div className="absolute inset-0 grid-bg opacity-10" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -67,13 +119,13 @@ export function Skills() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl neon-blue mb-4">Compétences</h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto rounded-full"></div>
+          <div className="h-1 w-32 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto rounded-full" />
           <p className="mt-6 text-gray-400 max-w-2xl mx-auto">
-            Une maîtrise complète des technologies modernes pour créer des solutions innovantes et performantes
+            Une maîtrise complète des technologies modernes pour concevoir des solutions performantes et scalables
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8">
           {skillsData.map((category, categoryIndex) => (
             <motion.div
               key={category.category}
@@ -84,7 +136,7 @@ export function Skills() {
               className="glass rounded-2xl p-8 holographic hover:scale-105 transition-transform duration-500"
             >
               <div className="flex items-center space-x-4 mb-8">
-                <div className={`p-4 rounded-xl bg-gradient-to-br ${category.color} glow-blue`}>
+                <div className={`p-4 rounded-xl bg-gradient-to-br ${category.color}`}>
                   <category.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl text-cyan-400">{category.category}</h3>
@@ -93,10 +145,14 @@ export function Skills() {
               <div className="space-y-6">
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skill.name}>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-gray-300">{skill.name}</span>
+                    <div className="flex justify-between mb-2 items-center">
+                      <span className="text-gray-300 flex items-center">
+                        {skill.icon}
+                        {skill.name}
+                      </span>
                       <span className="text-purple-400">{skill.level}%</span>
                     </div>
+
                     <div className="h-3 bg-gray-800/50 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
@@ -105,22 +161,9 @@ export function Skills() {
                         transition={{
                           duration: 1,
                           delay: categoryIndex * 0.1 + skillIndex * 0.1,
-                          ease: 'easeOut',
                         }}
-                        className={`h-full bg-gradient-to-r ${category.color} rounded-full relative`}
-                      >
-                        <motion.div
-                          animate={{
-                            opacity: [0.5, 1, 0.5],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                          }}
-                          className="absolute inset-0 bg-white/20"
-                        />
-                      </motion.div>
+                        className={`h-full bg-gradient-to-r ${category.color}`}
+                      />
                     </div>
                   </div>
                 ))}
@@ -128,71 +171,6 @@ export function Skills() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass rounded-3xl p-8 md:p-12 holographic"
-        >
-          <h3 className="text-3xl text-center mb-12 text-purple-400">Expertise Globale</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {[
-              { name: 'Frontend', value: 92, color: 'cyan' },
-              { name: 'Backend', value: 85, color: 'purple' },
-              { name: 'Mobile', value: 87, color: 'green' },
-              { name: 'Design', value: 80, color: 'pink' },
-              { name: 'DevOps', value: 75, color: 'orange' },
-              { name: 'Architecture', value: 83, color: 'blue' },
-            ].map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex flex-col items-center"
-              >
-                <div className="relative w-28 h-28 mb-4">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle
-                      cx="56"
-                      cy="56"
-                      r="48"
-                      stroke="rgba(255, 255, 255, 0.1)"
-                      strokeWidth="8"
-                      fill="none"
-                    />
-                    <motion.circle
-                      cx="56"
-                      cy="56"
-                      r="48"
-                      stroke={`var(--neon-${item.color === 'cyan' ? 'blue' : item.color === 'purple' ? 'purple' : 'blue'})`}
-                      strokeWidth="8"
-                      fill="none"
-                      strokeLinecap="round"
-                      initial={{ strokeDasharray: '0 301.593' }}
-                      whileInView={{
-                        strokeDasharray: `${(item.value / 100) * 301.593} 301.593`,
-                      }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 1.5,
-                        delay: index * 0.1,
-                        ease: 'easeOut',
-                      }}
-                      className="drop-shadow-[0_0_10px_rgba(0,212,255,0.8)]"
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-2xl text-white">{item.value}%</span>
-                  </div>
-                </div>
-                <span className="text-gray-400 text-center">{item.name}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

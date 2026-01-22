@@ -91,8 +91,8 @@ export function Footer() {
             viewport={{ once: true }}
             className="text-gray-400 text-sm flex items-center"
           >
-            © {new Date().getFullYear()} ADINGRA Koffi Jean Emmanuel Martial. 
-            Créé avec <Heart className="w-4 h-4 mx-1 text-red-500 fill-red-500" /> et React
+            © {new Date().getFullYear()} ADINGRA Koffi Jean Emmanuel Martial.
+            {/* Créé avec <Heart className="w-4 h-4 mx-1 text-red-500 fill-red-500" /> et React */}
           </motion.p>
 
           {/* Scroll to Top */}
@@ -107,14 +107,14 @@ export function Footer() {
         </div>
 
         {/* Accessibility Note */}
-        <motion.p
+        {/* <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-center text-xs text-gray-500 mt-4"
         >
           Site optimisé pour l'accessibilité • ARIA compliant • Responsive Design
-        </motion.p>
+        </motion.p> */}
       </div>
     </footer>
   );
