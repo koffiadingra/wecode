@@ -2,7 +2,6 @@ import { motion } from "motion/react";
 import { ChevronDown, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-// import { image } from "@/assets/1763398165966.png";
 
 export function Hero() {
   return (
@@ -10,10 +9,8 @@ export function Hero() {
       id="home"
       className="min-h-screen relative flex items-center justify-center overflow-hidden pt-20"
     >
-      {/* Animated Background Grid */}
       <div className="absolute inset-0 grid-bg opacity-20"></div>
 
-      {/* Floating Orbs */}
       <motion.div
         animate={{
           scale: [1, 1.2, 1],
@@ -41,7 +38,6 @@ export function Hero() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8">
-          {/* Profile Image with 3D Effect */}
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
@@ -53,7 +49,6 @@ export function Hero() {
             }}
             className="relative"
           >
-            {/* <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full blur-2xl opacity-50 animate-pulse"></div> */}
             <div className="relative glass rounded-full p-2 glow-blue">
               <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-cyan-400/30 holographic">
                 <ImageWithFallback
@@ -63,7 +58,6 @@ export function Hero() {
                 />
               </div>
             </div>
-            {/* Orbiting Icons */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -73,7 +67,6 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Title */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -88,7 +81,6 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,7 +90,6 @@ export function Hero() {
             Innovation technologique et créativité digitale
           </motion.p>
 
-          {/* Introduction Text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -113,7 +104,6 @@ export function Hero() {
             </p>
           </motion.div>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -135,7 +125,6 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          {/* Scroll Indicator */}
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}

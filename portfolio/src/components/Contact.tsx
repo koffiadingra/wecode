@@ -63,7 +63,6 @@ export function Contact() {
       id="contact"
       className="min-h-screen py-20 relative overflow-hidden"
     >
-      {/* Background Effects */}
       <div className="absolute inset-0 grid-bg opacity-10"></div>
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
@@ -72,7 +71,6 @@ export function Contact() {
       />
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +87,6 @@ export function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Action */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -118,9 +115,7 @@ export function Contact() {
             </Button>
           </motion.div>
 
-          {/* Infos + réseaux */}
           <div className="space-y-8">
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -147,7 +142,6 @@ export function Contact() {
               ))}
             </motion.div>
 
-            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -183,7 +177,6 @@ export function Contact() {
               </div>
             </motion.div>
 
-            {/* CV – MODIFICATION ICI */}
             <Button
               asChild
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 h-14"

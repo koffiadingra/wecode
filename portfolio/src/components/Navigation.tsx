@@ -32,7 +32,6 @@ export function Navigation() {
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-2"
@@ -43,7 +42,6 @@ export function Navigation() {
             <span className="hidden md:block neon-blue">ADINGRA Koffi</span>
           </motion.div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <motion.a
@@ -59,7 +57,6 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
@@ -69,7 +66,6 @@ export function Navigation() {
           </motion.button>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}

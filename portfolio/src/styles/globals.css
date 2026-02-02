@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Custom Properties */
 :root {
   --neon-blue: #00d4ff;
   --neon-purple: #b144ff;
@@ -9,7 +8,6 @@
   --glass-border: rgba(255, 255, 255, 0.125);
 }
 
-/* Dark Theme */
 body {
   @apply bg-gray-950 text-gray-100;
   background-image: 
@@ -21,7 +19,6 @@ body {
   background-attachment: fixed;
 }
 
-/* Glass Effect */
 .glass {
   background: var(--glass-bg);
   backdrop-filter: blur(16px) saturate(180%);
@@ -31,7 +28,6 @@ body {
     inset 0 0 40px rgba(0, 212, 255, 0.05);
 }
 
-/* Neon Glow Effects */
 .neon-blue {
   text-shadow: 
     0 0 10px rgba(0, 212, 255, 0.8),
@@ -60,7 +56,6 @@ body {
     inset 0 0 20px rgba(177, 68, 255, 0.1);
 }
 
-/* Holographic Effect */
 .holographic {
   position: relative;
   overflow: hidden;
@@ -87,7 +82,6 @@ body {
   50% { left: 100%; }
 }
 
-/* Grid Background */
 .grid-bg {
   background-image: 
     linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
@@ -95,7 +89,6 @@ body {
   background-size: 50px 50px;
 }
 
-/* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -113,7 +106,6 @@ body {
   background: linear-gradient(180deg, var(--neon-purple), var(--neon-blue));
 }
 
-/* Smooth Scroll */
 html {
   scroll-behavior: smooth;
 }

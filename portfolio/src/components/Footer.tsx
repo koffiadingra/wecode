@@ -8,12 +8,10 @@ export function Footer() {
 
   return (
     <footer className="relative py-12 border-t border-white/10">
-      {/* Background Effect */}
       <div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-transparent"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
-          {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -30,7 +28,6 @@ export function Footer() {
             </p>
           </motion.div>
 
-          {/* Quick Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +49,6 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* Legal */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -80,10 +76,8 @@ export function Footer() {
           </motion.div>
         </div>
 
-        {/* Divider */}
         <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mb-8"></div>
 
-        {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <motion.p
             initial={{ opacity: 0 }}
@@ -92,10 +86,8 @@ export function Footer() {
             className="text-gray-400 text-sm flex items-center"
           >
             © {new Date().getFullYear()} ADINGRA Koffi Jean Emmanuel Martial.
-            {/* Créé avec <Heart className="w-4 h-4 mx-1 text-red-500 fill-red-500" /> et React */}
           </motion.p>
 
-          {/* Scroll to Top */}
           <motion.button
             onClick={scrollToTop}
             whileHover={{ scale: 1.1 }}
@@ -105,16 +97,6 @@ export function Footer() {
             <ArrowUp className="w-5 h-5 text-cyan-400" />
           </motion.button>
         </div>
-
-        {/* Accessibility Note */}
-        {/* <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-xs text-gray-500 mt-4"
-        >
-          Site optimisé pour l'accessibilité • ARIA compliant • Responsive Design
-        </motion.p> */}
       </div>
     </footer>
   );

@@ -1,0 +1,172 @@
+📁 Structure du dossier React Native
+===================================
+
+Ce dossier contient une application React Native complète et indépendante.
+
+📂 Dossiers principaux
+----------------------
+
+react-native/
+├── 📄 App.tsx                    → Point d'entrée de l'application
+├── 📄 package.json               → Dépendances du projet
+├── 📄 app.json                   → Configuration Expo
+├── 📄 tsconfig.json              → Configuration TypeScript
+├── 📄 babel.config.js            → Configuration Babel
+├── 📄 eas.json                   → Configuration EAS Build
+│
+├── 📂 components/                → Composants React Native
+│   ├── ContactFormRN.tsx
+│   ├── ContactCardRN.tsx
+│   ├── QRCodeDisplayRN.tsx
+│   ├── AuthorizationModalRN.tsx
+│   └── SecurityStatusRN.tsx
+│
+├── 📂 utils/                     → Utilitaires
+│   ├── security.ts
+│   ├── nfcSecurity.ts
+│   └── storage.ts
+│
+├── 📂 types/                     → Types TypeScript
+│   └── contact.ts
+│
+├── 📂 assets/                    → Images et ressources
+│   └── README.md
+│
+└── 📂 Documentation/
+    ├── 📄 README.md              → Documentation complète
+    ├── 📄 QUICKSTART.md          → Guide de démarrage rapide
+    ├── 📄 INSTALLATION.md        → Installation détaillée
+    └── 📄 STRUCTURE.txt          → Ce fichier
+
+🚀 Démarrage rapide
+------------------
+
+1. Ouvrez un terminal dans ce dossier :
+   cd react-native
+
+2. Installez les dépendances :
+   npm install
+
+3. Lancez l'application :
+   npm start
+
+4. Scannez le QR Code avec Expo Go
+
+📱 Plateformes supportées
+------------------------
+
+✅ Android (6.0+)
+✅ iOS (11.0+)
+
+🛠️ Technologies utilisées
+------------------------
+
+- React Native (via Expo)
+- TypeScript
+- AsyncStorage (stockage)
+- NFC Manager (lecture/écriture NFC)
+- QRCode SVG (génération QR)
+- Haptics (vibrations)
+
+🔐 Sécurité
+----------
+
+✅ Validation des entrées
+✅ Sanitisation des données
+✅ Rate limiting
+✅ Logging sécurisé
+✅ Protection NFC
+✅ vCard sécurisée
+
+📚 Documentation
+---------------
+
+Commencez par lire dans cet ordre :
+
+1. QUICKSTART.md      → Pour commencer rapidement
+2. INSTALLATION.md    → Pour une installation détaillée
+3. README.md          → Pour la documentation complète
+
+💡 Différences avec la version Web
+----------------------------------
+
+Version React Native (ce dossier) :
+✅ Application mobile native
+✅ Disponible sur Play Store / App Store
+✅ Meilleur support NFC
+✅ Performance native
+✅ Retour haptique
+✅ AsyncStorage
+
+Version Web (dossier parent) :
+✅ Application web (PWA)
+✅ Accessible depuis un navigateur
+✅ Installation web
+✅ Service Worker
+✅ localStorage
+
+🎯 Pour tester localement
+-------------------------
+
+Option 1 : Téléphone physique
+- Installez Expo Go
+- Lancez : npm start
+- Scannez le QR Code
+
+Option 2 : Émulateur Android
+- Installez Android Studio
+- Lancez : npm run android
+
+Option 3 : Simulateur iOS (Mac)
+- Installez Xcode
+- Lancez : npm run ios
+
+⚙️ Build de production
+----------------------
+
+Android APK :
+  eas build --platform android --profile preview
+
+iOS IPA :
+  eas build --platform ios
+
+📦 Fichiers importants
+---------------------
+
+- App.tsx           → Code principal de l'app
+- package.json      → Liste des dépendances
+- app.json          → Configuration Expo (nom, icône, etc.)
+- eas.json          → Configuration des builds
+
+🔄 Workflow de développement
+---------------------------
+
+1. Modifiez le code (App.tsx, components/, etc.)
+2. L'app se recharge automatiquement
+3. Testez les modifications
+4. Répétez !
+
+Appuyez sur 'r' dans le terminal pour forcer un rechargement.
+
+🆘 En cas de problème
+--------------------
+
+1. Nettoyez le cache :
+   npm start -- --clear
+
+2. Réinstallez les dépendances :
+   rm -rf node_modules
+   npm install
+
+3. Utilisez le mode tunnel :
+   npm start -- --tunnel
+
+4. Consultez INSTALLATION.md section "Résolution de problèmes"
+
+✨ Prêt à commencer !
+-------------------
+
+Ouvrez un terminal dans ce dossier et tapez :
+  npm install && npm start
+
+Bonne programmation ! 🎉

@@ -5,7 +5,6 @@ import React from "react";
 
 export function About() {
   const techStack = [
-    // Backend / Frontend
     { name: "Python (Flask)", icon: "🐍", color: "from-yellow-500 to-blue-500" },
     { name: "PHP (Laravel)", icon: "🐘", color: "from-red-500 to-orange-500" },
     { name: "Vue.js", icon: "💚", color: "from-green-400 to-emerald-600" },
@@ -16,17 +15,14 @@ export function About() {
     { name: "TailwindCSS", icon: "💨", color: "from-cyan-300 to-blue-400" },
     { name: "HTML5 & CSS3", icon: "🎨", color: "from-orange-500 to-red-500" },
 
-    // Systèmes
     { name: "Rust", icon: "🦀", color: "from-orange-600 to-red-700" },
     { name: "Java (Spring Boot)", icon: "☕", color: "from-red-500 to-yellow-500" },
     { name: "C", icon: "💻", color: "from-blue-400 to-blue-700" },
 
-    // Bases de données (AJOUT)
     { name: "MongoDB", icon: "🍃", color: "from-green-600 to-green-400" },
     { name: "MySQL", icon: "🗄️", color: "from-blue-600 to-cyan-500" },
     { name: "SQLite", icon: "📦", color: "from-gray-500 to-gray-400" },
 
-    // Outils & BaaS (AJOUT)
     { name: "Firebase", icon: "🔥", color: "from-yellow-400 to-orange-500" },
     { name: "Appwrite", icon: "🧩", color: "from-pink-500 to-purple-600" },
     { name: "Cloudinary", icon: "☁️", color: "from-sky-400 to-blue-600" },
@@ -77,7 +73,6 @@ export function About() {
       <div className="absolute inset-0 grid-bg opacity-10"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Titre */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -90,7 +85,6 @@ export function About() {
           <div className="h-1 w-32 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto rounded-full"></div>
         </motion.div>
 
-        {/* Stack */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +116,6 @@ export function About() {
           </div>
         </motion.div>
 
-        {/* Catégories */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category, index) => (
             <motion.div

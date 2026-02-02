@@ -49,4 +49,12 @@ class User extends Authenticatable
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+    public function posts():HasMany
+    {
+        return $this->HasMany(Post::class);
+    }
+    public function likedpost():BelongsToMany
+    {
+        return $this->belongsToMany(Post::class, "posts_like");
+    }
 }

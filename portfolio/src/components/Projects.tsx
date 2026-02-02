@@ -135,7 +135,6 @@ export function Projects() {
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
         <div className="mb-12">
           <AnimatePresence mode="wait">
             <motion.div
@@ -155,7 +154,6 @@ export function Projects() {
                   whileHover={{ y: -10, rotateY: 5 }}
                   className="glass rounded-2xl overflow-hidden holographic group"
                 >
-                  {/* Project Image */}
                   <div className="relative h-48 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10"></div>
                     <ImageWithFallback
@@ -168,7 +166,6 @@ export function Projects() {
                     ></div>
                   </div>
 
-                  {/* Project Content */}
                   <div className="p-6">
                     <h3 className="text-xl mb-3 text-cyan-400 group-hover:text-purple-400 transition-colors">
                       {project.title}
@@ -219,7 +216,6 @@ export function Projects() {
           </AnimatePresence>
         </div>
 
-        {/* Pagination */}
         <div className="flex items-center justify-center gap-6">
           <Button
             onClick={prevPage}
