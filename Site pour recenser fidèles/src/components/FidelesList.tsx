@@ -14,7 +14,6 @@ import { Badge } from './ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { toast } from 'sonner';
 import { ArrowLeft, Plus, Pencil, Trash2, Upload, X, Filter, Church } from 'lucide-react';
-import { isDemoMode, getDemoFideles, saveDemoFideles, getDemoUserRole } from '../utils/demoData';
 import { fileToBase64 } from '../utils/firebase/storage';
 
 interface Fidele {
@@ -65,7 +64,6 @@ export function FidelesList() {
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingFidele, setEditingFidele] = useState<Fidele | null>(null);
-  const [isDemo, setIsDemo] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
   const [uploading, setUploading] = useState(false);
@@ -121,16 +119,6 @@ export function FidelesList() {
   };
 
   const checkAuth = async () => {
-    if (isDemoMode()) {
-      setIsDemo(true);
-      const role = getDemoUserRole();
-      if (role !== 'pasteur') {
-        toast.error('Accès refusé : seuls les pasteurs peuvent gérer les fidèles');
-        navigate('/dashboard');
-      }
-      return;
-    }
-
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         navigate('/');
@@ -155,13 +143,6 @@ export function FidelesList() {
 
   const loadFideles = async () => {
     try {
-      // Demo mode: use local storage
-      if (isDemoMode()) {
-        setFideles(getDemoFideles());
-        setLoading(false);
-        return;
-      }
-
       const querySnapshot = await getDocs(collection(db, 'fideles'));
       const fidelesData: Fidele[] = [];
       querySnapshot.forEach((doc) => {
@@ -221,41 +202,8 @@ export function FidelesList() {
 
       // Upload photo si un fichier a été sélectionné
       if (selectedFile) {
-        if (isDemo) {
-          // Mode démo: convertir en base64
-          photoUrl = await fileToBase64(selectedFile);
-        } else {
-          // Mode réel: uploader vers Firebase Storage
-          photoUrl = await uploadPhoto(selectedFile);
-        }
-      }
-
-      // Demo mode: save locally
-      if (isDemo) {
-        if (editingFidele) {
-          const updated = fideles.map(f => 
-            f.id === editingFidele.id 
-              ? { ...f, ...formData, photo: photoUrl }
-              : f
-          );
-          saveDemoFideles(updated);
-          setFideles(updated);
-          toast.success('Fidèle modifié avec succès');
-        } else {
-          const newFidele = {
-            id: `demo-${Date.now()}`,
-            ...formData,
-            photo: photoUrl,
-          };
-          const updated = [...fideles, newFidele];
-          saveDemoFideles(updated);
-          setFideles(updated);
-          toast.success('Fidèle ajouté avec succès');
-        }
-        setDialogOpen(false);
-        resetForm();
-        setUploading(false);
-        return;
+        // Mode réel: uploader vers Firebase Storage
+        photoUrl = await uploadPhoto(selectedFile);
       }
 
       // Mode Firebase
@@ -304,15 +252,6 @@ export function FidelesList() {
     }
 
     try {
-      // Demo mode: delete locally
-      if (isDemo) {
-        const updated = fideles.filter(f => f.id !== id);
-        saveDemoFideles(updated);
-        setFideles(updated);
-        toast.success('Fidèle supprimé');
-        return;
-      }
-
       // Supprimer la photo de Storage si elle existe
       if (photoUrl && photoUrl.includes('firebase')) {
         try {
@@ -500,7 +439,7 @@ export function FidelesList() {
                   <Select
                     id="fonction"
                     value={formData.fonction}
-                    onValueChange={(value) => setFormData({ ...formData, fonction: value })}
+                    onValueChange={(value: any) => setFormData({ ...formData, fonction: value })}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Sélectionnez une fonction">
@@ -522,7 +461,7 @@ export function FidelesList() {
                   <Select
                     id="service"
                     value={formData.service}
-                    onValueChange={(value) => setFormData({ ...formData, service: value })}
+                    onValueChange={(value: any) => setFormData({ ...formData, service: value })}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Sélectionnez un service">

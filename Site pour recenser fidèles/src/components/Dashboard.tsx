@@ -8,14 +8,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Badge } from './ui/badge';
 import { Users, UserCheck, LogOut, Church, BarChart3 } from 'lucide-react';
 import { toast } from 'sonner';
-import { isDemoMode, disableDemoMode, getDemoUser, type UserRole } from '../utils/demoData';
+
+type UserRole = 'pasteur' | 'recenseur';
 
 export function Dashboard() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isDemo, setIsDemo] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -23,28 +23,12 @@ export function Dashboard() {
 
   const checkAuth = async () => {
     try {
-      // Check if demo mode
-      if (isDemoMode()) {
-        setIsDemo(true);
-        const demoUser = getDemoUser();
-        if (demoUser) {
-          setUserName(demoUser.name);
-          setUserRole(demoUser.role);
-        } else {
-          setUserName('Utilisateur Démo');
-          setUserRole('recenseur');
-        }
-        setLoading(false);
-        return;
-      }
-
       const unsubscribe = onAuthStateChanged(auth, async (user) => {
         if (!user) {
           navigate('/');
           return;
         }
 
-        // Récupérer le nom et le rôle depuis Firestore
         try {
           const userDoc = await getDoc(doc(db, 'users', user.uid));
           if (userDoc.exists()) {
@@ -72,13 +56,6 @@ export function Dashboard() {
   };
 
   const handleLogout = async () => {
-    if (isDemo) {
-      disableDemoMode();
-      toast.success('Mode démo quitté');
-      navigate('/');
-      return;
-    }
-
     try {
       await signOut(auth);
       toast.success('Déconnexion réussie');
@@ -117,9 +94,6 @@ export function Dashboard() {
               <Badge variant={isPasteur ? "default" : "secondary"} className={isPasteur ? "bg-indigo-600" : ""}>
                 {isPasteur ? "🔑 Pasteur" : "📋 Recenseur"}
               </Badge>
-              {isDemo && (
-                <Badge variant="outline">🎭 Mode Démo</Badge>
-              )}
             </div>
           </div>
           <Button variant="outline" onClick={handleLogout}>

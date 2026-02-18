@@ -8,7 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Badge } from './ui/badge';
 import { toast } from 'sonner';
 import { ArrowLeft, Church, TrendingUp, Users, Calendar, Award } from 'lucide-react';
-import { isDemoMode, getDemoFideles, getDemoPresences, getDemoUserRole } from '../utils/demoData';
 
 interface Fidele {
   id: string;
@@ -53,7 +52,6 @@ export function Statistiques() {
     presencesParService: {},
   });
   const [loading, setLoading] = useState(true);
-  const [isDemo, setIsDemo] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -61,16 +59,6 @@ export function Statistiques() {
   }, []);
 
   const checkAuth = async () => {
-    if (isDemoMode()) {
-      setIsDemo(true);
-      const role = getDemoUserRole();
-      if (role !== 'pasteur') {
-        toast.error('Accès refusé : seuls les pasteurs peuvent voir les statistiques');
-        navigate('/dashboard');
-      }
-      return;
-    }
-
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         navigate('/');
@@ -95,26 +83,6 @@ export function Statistiques() {
 
   const loadData = async () => {
     try {
-      // Demo mode
-      if (isDemoMode()) {
-        const demoFideles = getDemoFideles();
-        const demoPresencesData = getDemoPresences();
-        
-        // Convertir les présences démo en tableau
-        const allPresences: Presence[] = [];
-        Object.keys(demoPresencesData).forEach(date => {
-          Object.values(demoPresencesData[date]).forEach(presence => {
-            allPresences.push(presence as Presence);
-          });
-        });
-
-        setFideles(demoFideles);
-        setPresences(allPresences);
-        calculateStats(demoFideles, allPresences);
-        setLoading(false);
-        return;
-      }
-
       // Charger les fidèles
       const fidelesSnapshot = await getDocs(collection(db, 'fideles'));
       const fidelesData: Fidele[] = [];

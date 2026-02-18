@@ -10,7 +10,6 @@ import { Badge } from './ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { toast } from 'sonner';
 import { ArrowLeft, Check, X, FileDown, Church } from 'lucide-react';
-import { isDemoMode, getDemoFideles, getDemoPresences, saveDemoPresences, getDemoPresenceDates } from '../utils/demoData';
 import jsPDF from 'jspdf';
 
 interface Fidele {
@@ -39,7 +38,6 @@ export function Presences() {
   const [selectedDate, setSelectedDate] = useState(getNextSunday());
   const [loading, setLoading] = useState(true);
   const [availableDates, setAvailableDates] = useState<string[]>([]);
-  const [isDemo, setIsDemo] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -63,11 +61,6 @@ export function Presences() {
   }
 
   const checkAuth = async () => {
-    if (isDemoMode()) {
-      setIsDemo(true);
-      return;
-    }
-
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate('/');
@@ -77,13 +70,6 @@ export function Presences() {
 
   const loadFideles = async () => {
     try {
-      // Demo mode
-      if (isDemoMode()) {
-        setFideles(getDemoFideles());
-        setLoading(false);
-        return;
-      }
-
       const querySnapshot = await getDocs(collection(db, 'fideles'));
       const fidelesData: Fidele[] = [];
       querySnapshot.forEach((doc) => {
@@ -100,12 +86,6 @@ export function Presences() {
 
   const loadAvailableDates = async () => {
     try {
-      // Demo mode
-      if (isDemoMode()) {
-        setAvailableDates(getDemoPresenceDates());
-        return;
-      }
-
       const querySnapshot = await getDocs(collection(db, 'presences'));
       const dates = new Set<string>();
       querySnapshot.forEach((doc) => {
@@ -122,13 +102,6 @@ export function Presences() {
 
   const loadPresences = async (date: string) => {
     try {
-      // Demo mode
-      if (isDemoMode()) {
-        const demoPresences = getDemoPresences(date);
-        setPresences(demoPresences);
-        return;
-      }
-
       const q = query(collection(db, 'presences'), where('date', '==', date));
       const querySnapshot = await getDocs(q);
       const presencesMap: Record<string, Presence> = {};
@@ -143,37 +116,6 @@ export function Presences() {
   };
 
   const markPresence = async (fideleId: string, present: boolean) => {
-    // Demo mode
-    if (isDemo) {
-      const allPresences = getDemoPresences();
-      if (!allPresences[selectedDate]) {
-        allPresences[selectedDate] = {};
-      }
-      
-      const newPresence = {
-        fideleId,
-        date: selectedDate,
-        present,
-        markedAt: new Date().toISOString(),
-      };
-      
-      allPresences[selectedDate][fideleId] = newPresence;
-      saveDemoPresences(allPresences);
-      
-      setPresences({
-        ...presences,
-        [fideleId]: newPresence,
-      });
-      
-      toast.success('Présence enregistrée');
-      
-      // Reload available dates
-      if (!availableDates.includes(selectedDate)) {
-        setAvailableDates([selectedDate, ...availableDates].sort().reverse());
-      }
-      return;
-    }
-
     try {
       const presence = {
         fideleId,
@@ -182,7 +124,6 @@ export function Presences() {
         markedAt: new Date().toISOString(),
       };
 
-      // Utiliser un ID unique pour la présence (date + fideleId)
       const presenceId = `${selectedDate}_${fideleId}`;
       await setDoc(doc(db, 'presences', presenceId), presence);
 
@@ -193,7 +134,6 @@ export function Presences() {
       
       toast.success('Présence enregistrée');
       
-      // Reload available dates
       if (!availableDates.includes(selectedDate)) {
         loadAvailableDates();
       }
@@ -214,47 +154,6 @@ export function Presences() {
 
   const stats = getPresenceStats();
 
-  const downloadPresenceReport = () => {
-    const dateFormatted = new Date(selectedDate).toLocaleDateString('fr-FR', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-
-    // Créer le contenu CSV
-    let csvContent = '\uFEFF'; // BOM pour UTF-8
-    csvContent += `Liste de présence - ${dateFormatted}\n\n`;
-    csvContent += 'Nom,Prénom,Fonction,Service,Téléphone,Lieu de résidence,Présence\n';
-
-    fideles.forEach(fidele => {
-      const presence = presences[fidele.id];
-      const presenceStatus = presence ? (presence.present ? 'Présent' : 'Absent') : 'Non marqué';
-      
-      csvContent += `"${fidele.nom}","${fidele.prenom}","${fidele.fonction || ''}","${fidele.service || ''}","${fidele.telephone || ''}","${fidele.lieuResidence || ''}","${presenceStatus}"\n`;
-    });
-
-    csvContent += `\n\nStatistiques:\n`;
-    csvContent += `Total,${stats.total}\n`;
-    csvContent += `Présents,${stats.present}\n`;
-    csvContent += `Absents,${stats.absent}\n`;
-    csvContent += `Non marqués,${stats.notMarked}\n`;
-
-    // Créer un blob et télécharger
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    
-    link.setAttribute('href', url);
-    link.setAttribute('download', `presence_${selectedDate}.csv`);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    toast.success('Liste téléchargée avec succès');
-  };
-
   const downloadPresenceReportPDF = async () => {
     toast.info('Génération du PDF en cours...');
     
@@ -270,7 +169,6 @@ export function Presences() {
     const pageHeight = pdf.internal.pageSize.getHeight();
     let yPosition = 20;
 
-    // Fonction pour ajouter une nouvelle page si nécessaire
     const checkPageBreak = (neededSpace: number) => {
       if (yPosition + neededSpace > pageHeight - 20) {
         pdf.addPage();
@@ -280,7 +178,6 @@ export function Presences() {
       return false;
     };
 
-    // Fonction pour convertir une image en base64
     const getBase64Image = (url: string): Promise<string> => {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -298,7 +195,6 @@ export function Presences() {
       });
     };
 
-    // En-tête du document
     pdf.setFontSize(18);
     pdf.setFont('helvetica', 'bold');
     pdf.text('Chapelle Pleine de Gloire', pageWidth / 2, yPosition, { align: 'center' });
@@ -313,19 +209,16 @@ export function Presences() {
     pdf.text(dateFormatted, pageWidth / 2, yPosition, { align: 'center' });
     yPosition += 15;
 
-    // Statistiques en haut
     pdf.setFontSize(10);
     pdf.setFont('helvetica', 'bold');
     const statsText = `Total: ${stats.total}  |  Présents: ${stats.present}  |  Absents: ${stats.absent}  |  Non marqués: ${stats.notMarked}`;
     pdf.text(statsText, pageWidth / 2, yPosition, { align: 'center' });
     yPosition += 15;
 
-    // Ligne de séparation
     pdf.setDrawColor(200, 200, 200);
     pdf.line(10, yPosition, pageWidth - 10, yPosition);
     yPosition += 10;
 
-    // Liste des fidèles avec photos
     for (const fidele of fideles) {
       checkPageBreak(35);
 
@@ -333,7 +226,6 @@ export function Presences() {
       const presenceStatus = presence ? (presence.present ? 'PRÉSENT' : 'ABSENT') : 'NON MARQUÉ';
       const presenceColor = presence ? (presence.present ? [34, 197, 94] : [239, 68, 68]) : [156, 163, 175];
 
-      // Photo du fidèle
       const photoSize = 25;
       const photoX = 15;
       const photoY = yPosition;
@@ -343,7 +235,6 @@ export function Presences() {
           const imgData = await getBase64Image(fidele.photo);
           pdf.addImage(imgData, 'JPEG', photoX, photoY, photoSize, photoSize);
         } else {
-          // Rectangle avec initiales si pas de photo
           pdf.setFillColor(99, 102, 241);
           pdf.rect(photoX, photoY, photoSize, photoSize, 'F');
           pdf.setTextColor(255, 255, 255);
@@ -357,7 +248,6 @@ export function Presences() {
         }
       } catch (error) {
         console.error('Error loading image:', error);
-        // Rectangle avec initiales en cas d'erreur
         pdf.setFillColor(99, 102, 241);
         pdf.rect(photoX, photoY, photoSize, photoSize, 'F');
         pdf.setTextColor(255, 255, 255);
@@ -370,7 +260,6 @@ export function Presences() {
         );
       }
 
-      // Informations du fidèle
       pdf.setTextColor(0, 0, 0);
       const infoX = photoX + photoSize + 10;
       
@@ -398,21 +287,18 @@ export function Presences() {
         pdf.text(`Résidence: ${fidele.lieuResidence}`, infoX + 70, photoY + 17);
       }
 
-      // Statut de présence
       const statusX = pageWidth - 45;
       pdf.setFontSize(10);
       pdf.setFont('helvetica', 'bold');
       pdf.setTextColor(presenceColor[0], presenceColor[1], presenceColor[2]);
       pdf.text(presenceStatus, statusX, photoY + photoSize / 2 + 3);
 
-      // Ligne de séparation
       yPosition += photoSize + 5;
       pdf.setDrawColor(230, 230, 230);
       pdf.line(10, yPosition, pageWidth - 10, yPosition);
       yPosition += 5;
     }
 
-    // Footer avec statistiques détaillées
     checkPageBreak(40);
     yPosition += 10;
     pdf.setDrawColor(200, 200, 200);
@@ -438,7 +324,6 @@ export function Presences() {
     pdf.setTextColor(156, 163, 175);
     pdf.text(`Non marqués: ${stats.notMarked}`, 15, yPosition);
 
-    // Sauvegarder le PDF
     pdf.save(`presence_${selectedDate}.pdf`);
     toast.success('PDF téléchargé avec succès !');
   };
@@ -454,7 +339,6 @@ export function Presences() {
   return (
     <div className="min-h-screen p-4 md:p-8 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       <div className="max-w-6xl mx-auto">
-        {/* En-tête avec le nom de l'église */}
         <div className="flex items-center gap-3 mb-6">
           <Church className="w-6 h-6 text-indigo-600" />
           <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">

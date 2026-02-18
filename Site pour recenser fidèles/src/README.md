@@ -15,7 +15,7 @@ Application web de gestion d'église développée avec **React**, **TypeScript**
 - ✅ Gestion complète des fidèles (ajout, modification, suppression)
 - ✅ Enregistrement des présences
 - ✅ Consultation des statistiques détaillées
-- ✅ Export CSV des présences
+- ✅ Export PDF des présences avec photos
 - ✅ Gestion des fonctions et services
 
 #### 📋 Espace Recenseur (Accès limité)
@@ -38,7 +38,7 @@ Application web de gestion d'église développée avec **React**, **TypeScript**
 - ✅ Sélection de la date du culte
 - ✅ Compteurs en temps réel (Présents/Absents)
 - ✅ Historique complet des présences
-- ✅ Export CSV avec toutes les informations
+- ✅ Export PDF avec photos et statistiques
 
 ### 📈 Statistiques (Pasteur uniquement)
 - ✅ Total des fidèles
@@ -48,11 +48,6 @@ Application web de gestion d'église développée avec **React**, **TypeScript**
 - ✅ Répartition par fonction
 - ✅ Répartition par service
 - ✅ Graphiques et visualisations
-
-### 🎭 Mode Démo
-- ✅ Tester l'application sans créer de compte
-- ✅ 2 comptes démo : Pasteur et Recenseur
-- ✅ Données de démonstration pré-remplies
 
 ---
 
@@ -101,22 +96,6 @@ Application web de gestion d'église développée avec **React**, **TypeScript**
 
 ### Première connexion
 
-#### Option 1 : Mode Démo (Recommandé pour tester)
-
-Sur la page de connexion, cliquez sur **"Mode Démo"** puis choisissez :
-
-**Compte Pasteur :**
-- Email : `pasteur@chapelle.com`
-- Mot de passe : `pasteur123`
-- Accès : Complet
-
-**Compte Recenseur :**
-- Email : `recenseur@chapelle.com`
-- Mot de passe : `recenseur123`
-- Accès : Présences uniquement
-
-#### Option 2 : Créer un compte réel
-
 1. Cliquez sur **"Créer un compte"**
 2. Remplissez le formulaire :
    - Nom complet
@@ -146,7 +125,7 @@ Point central de l'application avec accès rapide à :
 2. Sélectionnez la date du culte
 3. Marquez chaque fidèle comme **Présent** ✓ ou **Absent** ✗
 4. Les compteurs se mettent à jour en temps réel
-5. Téléchargez le CSV pour l'archivage
+5. Téléchargez le PDF pour l'archivage
 
 #### Statistiques (Pasteur)
 1. Cliquez sur **"Statistiques"**
@@ -164,11 +143,13 @@ Point central de l'application avec accès rapide à :
 - **Tailwind CSS v4** - Framework CSS
 - **React Router** - Navigation
 - **Lucide React** - Icônes
+- **jsPDF** - Génération de PDF
 
 ### Backend
 - **Firebase Authentication** - Gestion des utilisateurs
 - **Firestore Database** - Base de données NoSQL
 - **Firebase Storage** - Stockage des photos
+- **Firebase Analytics** - Suivi d'utilisation
 
 ### UI Components
 - Composants personnalisés basés sur shadcn/ui
@@ -182,34 +163,34 @@ Point central de l'application avec accès rapide à :
 ### Collection `users`
 ```typescript
 {
-  name: string;           // Nom complet
-  email: string;          // Email
-  role: 'pasteur' | 'recenseur';  // Rôle
-  createdAt: string;      // Date de création ISO
+  name: string;
+  email: string;
+  role: 'pasteur' | 'recenseur';
+  createdAt: string;
 }
 ```
 
 ### Collection `fideles`
 ```typescript
 {
-  nom: string;            // Nom de famille
-  prenom: string;         // Prénom
-  photo: string | null;   // URL de la photo
-  dateAdhesion: string;   // Date au format YYYY-MM-DD
-  fonction?: string;      // Pasteur, Ancien, Diacre, etc.
-  service?: string;       // Direction, Louange, etc.
-  telephone?: string;     // Numéro de téléphone
-  lieuResidence?: string; // Ville/Quartier
+  nom: string;
+  prenom: string;
+  photo: string | null;
+  dateAdhesion: string;
+  fonction?: string;
+  service?: string;
+  telephone?: string;
+  lieuResidence?: string;
 }
 ```
 
 ### Collection `presences`
 ```typescript
 {
-  fideleId: string;       // ID du fidèle
-  date: string;           // Date au format YYYY-MM-DD
-  present: boolean;       // true = présent, false = absent
-  markedAt: string;       // Timestamp ISO de l'enregistrement
+  fideleId: string;
+  date: string;
+  present: boolean;
+  markedAt: string;
 }
 ```
 
@@ -225,8 +206,8 @@ Point central de l'application avec accès rapide à :
 
 ### Règles de sécurité Storage
 - ✅ Les photos sont accessibles en lecture à tous les authentifiés
-- ✅ Seuls les pasteurs peuvent uploader/supprimer des photos
-- ✅ Validation du type de fichier (images uniquement)
+- ✅ Upload de photos limité aux utilisateurs authentifiés
+- ✅ Limite de taille de fichier (5 Mo maximum)
 
 ### Bonnes pratiques
 - 🔐 Mots de passe minimum 6 caractères
@@ -238,11 +219,11 @@ Point central de l'application avec accès rapide à :
 
 ## 📦 Export de données
 
-### Export CSV des présences
-- Format compatible Excel/Google Sheets
-- Colonnes : Nom, Prénom, Fonction, Service, Téléphone, Résidence, Présence
+### Export PDF des présences
+- Format professionnel avec photos des fidèles
+- Informations complètes : Nom, Prénom, Fonction, Service, Téléphone, Résidence
 - Statistiques incluses (Total, Présents, Absents, Taux)
-- Nom du fichier : `presence_YYYY-MM-DD.csv`
+- Nom du fichier : `presence_YYYY-MM-DD.pdf`
 
 ---
 
@@ -329,7 +310,7 @@ Développé avec ❤️ pour faciliter la gestion des églises et communautés.
 - ✅ Gestion complète des fidèles
 - ✅ Enregistrement des présences
 - ✅ Statistiques détaillées
-- ✅ Export CSV
+- ✅ Export PDF avec photos
 
 ### Futures améliorations possibles
 - 📧 Envoi d'emails aux absents
@@ -345,5 +326,5 @@ Développé avec ❤️ pour faciliter la gestion des églises et communautés.
 ---
 
 **Version :** 1.0.0  
-**Dernière mise à jour :** Février 2024  
+**Dernière mise à jour :** Février 2026  
 **Développé avec Figma Make**

@@ -10,7 +10,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { toast } from 'sonner';
 import { Church, User, Users } from 'lucide-react';
-import { enableDemoMode, setDemoUser, DEMO_USERS, type UserRole } from '../utils/demoData';
+import image from '../assets/image.jpg';
+
+type UserRole = 'pasteur' | 'recenseur';
 
 export function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -19,7 +21,6 @@ export function Login() {
   const [name, setName] = useState('');
   const [role, setRole] = useState<UserRole>('recenseur');
   const [loading, setLoading] = useState(false);
-  const [showDemoOptions, setShowDemoOptions] = useState(false);
   const navigate = useNavigate();
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -29,7 +30,6 @@ export function Login() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       
-      // Sauvegarder les informations supplémentaires dans Firestore
       await setDoc(doc(db, 'users', userCredential.user.uid), {
         name,
         email,
@@ -73,21 +73,15 @@ export function Login() {
     }
   };
 
-  const handleDemoLogin = (demoUser: typeof DEMO_USERS[0]) => {
-    enableDemoMode();
-    setDemoUser(demoUser.email, demoUser.role, demoUser.name);
-    toast.success(`Connecté en mode démo en tant que ${demoUser.name}`);
-    navigate('/dashboard');
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="space-y-4">
           <div className="flex justify-center">
-            <div className="bg-gradient-to-br from-indigo-600 to-purple-600 p-4 rounded-full shadow-lg">
+          <img src={image} alt="Chapelle Pleine de Gloire" className="w-full h-32 object-cover rounded-tl-lg rounded-tr-lg" />
+            {/* <div className="bg-gradient-to-br from-indigo-600 to-purple-600 p-4 rounded-full shadow-lg">
               <Church className="w-8 h-8 text-white" />
-            </div>
+            </div> */}
           </div>
           <div className="text-center">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
@@ -120,7 +114,7 @@ export function Login() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="role">Rôle</Label>
-                  <Select value={role} onValueChange={(value) => setRole(value as UserRole)}>
+                  <Select value={role} onValueChange={(value: string) => setRole(value as UserRole)}>
                     <SelectTrigger id="role">
                       <SelectValue />
                     </SelectTrigger>
@@ -128,13 +122,13 @@ export function Login() {
                       <SelectItem value="pasteur">
                         <div className="flex items-center gap-2">
                           <User className="w-4 h-4" />
-                          <span>Pasteur (accès complet)</span>
+                          <span>Pasteur</span>
                         </div>
                       </SelectItem>
                       <SelectItem value="recenseur">
                         <div className="flex items-center gap-2">
                           <Users className="w-4 h-4" />
-                          <span>Recenseur (présences uniquement)</span>
+                          <span>Recenseur</span>
                         </div>
                       </SelectItem>
                     </SelectContent>
@@ -187,53 +181,6 @@ export function Login() {
                 ? 'Déjà un compte ? Se connecter'
                 : 'Créer un compte'}
             </Button>
-          </div>
-          <div className="mt-2 text-center border-t pt-4 space-y-2">
-            {!showDemoOptions ? (
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => setShowDemoOptions(true)}
-                type="button"
-              >
-                🎭 Mode Démo (tester sans compte)
-              </Button>
-            ) : (
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-gray-700 mb-3">Choisir un compte démo :</p>
-                {DEMO_USERS.map((demoUser) => (
-                  <Button
-                    key={demoUser.email}
-                    variant="outline"
-                    className="w-full justify-start"
-                    onClick={() => handleDemoLogin(demoUser)}
-                    type="button"
-                  >
-                    <div className="flex items-center gap-3">
-                      {demoUser.role === 'pasteur' ? (
-                        <User className="w-5 h-5 text-indigo-600" />
-                      ) : (
-                        <Users className="w-5 h-5 text-purple-600" />
-                      )}
-                      <div className="text-left">
-                        <div className="font-medium">{demoUser.name}</div>
-                        <div className="text-xs text-gray-500">
-                          {demoUser.email} • {demoUser.role === 'pasteur' ? 'Accès complet' : 'Présences'}
-                        </div>
-                      </div>
-                    </div>
-                  </Button>
-                ))}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowDemoOptions(false)}
-                  type="button"
-                >
-                  Annuler
-                </Button>
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>
