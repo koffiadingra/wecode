@@ -79,7 +79,7 @@ export default function Login() {
           >
             {error && <p style={{ color: "red" }}>{error}</p>}
             <div className="flex flex-col space-y-2">
-              <label htmlFor="email" className="">Adresse mail</label>
+              <label htmlFor="email">Adresse mail</label>
               <input
                 type="email"
                 id="email"
@@ -91,7 +91,7 @@ export default function Login() {
             </div>
 
             <div className="relative">
-              <label htmlFor="password" className="block mb-2 ">
+              <label htmlFor="password" className="block mb-2">
                 Mot de passe
               </label>
               <input
@@ -136,6 +136,7 @@ export default function Login() {
               </div>
               <div>
                 <Link
+                  // href="/create_client"
                   href="/dashboard"
                   className="text-sm text-black font-bold "
                 >

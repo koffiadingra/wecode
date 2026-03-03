@@ -14,11 +14,16 @@ import {
   ChartColumn,
   Menu,
 } from "lucide-react";
-import xsel_image from "../public/xsel_logo.png"
+import xsel_image from "../public/xsel_logo.png";
 
 interface User {
   name: string;
   email: string;
+}
+
+interface SidebarProps {
+  isCollapsed: boolean;
+  onToggle: () => void;
 }
 
 const getInitials = (name: string): string => {
@@ -64,12 +69,11 @@ const menuItems = [
   { href: "/inventaire", title: "Inventaire", icon: Warehouse },
   { href: "/commande", title: "Commandes", icon: ShoppingCart },
   { href: "/Devis", title: "Devis", icon: FileText },
-  { href: "/create_client", title: "Clients", icon: Users },
+  { href: "/Client", title: "Clients", icon: Users },
   { href: "/analytiques", title: "Analytiques", icon: ChartColumn },
 ];
 
-const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const pathname = usePathname();
@@ -81,20 +85,17 @@ const Sidebar = () => {
       setUser(userData);
       setLoadingUser(false);
     };
-
     loadUser();
   }, []);
 
   const initials = user ? getInitials(user.name) : "??";
 
   return (
-    <aside
-      className={`fixed top-0 left-0 h-full bg-white border-r border-gray-200 shadow-sm flex flex-col transition-all duration-300 ${
-        collapsed ? "w-16" : "w-64"
-      }`}
-    >
+    // ✅ Plus de "fixed" — la largeur est pilotée par DashboardLayout
+    <aside className="h-full bg-white border-r border-gray-200 shadow-sm flex flex-col">
+      {/* Header logo + bouton toggle */}
       <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
-        {!collapsed && (
+        {!isCollapsed && (
           <div className="flex items-center">
             <Image
               src={xsel_image}
@@ -105,13 +106,14 @@ const Sidebar = () => {
           </div>
         )}
         <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="p-1.5 rounded-md hover:bg-teal-50 text-gray-500 "
+          onClick={onToggle}
+          className="p-1.5 rounded-md hover:bg-slate-300 text-gray-500"
         >
           <Menu size={20} />
         </button>
       </div>
 
+      {/* Navigation */}
       <nav className="flex-1 px-2 py-4 space-y-1">
         {menuItems.map((item) => {
           const isActive = pathname === item.href;
@@ -119,22 +121,22 @@ const Sidebar = () => {
             <Link
               key={item.href}
               href={item.href}
-              title={collapsed ? item.title : ""}
+              title={isCollapsed ? item.title : ""}
               className={`group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-150 ${
                 isActive
-                  ? "bg-teal-50 text-teal-500"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-teal-500"
+                  ? "bg-slate-50 text-slate-950"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-slate-950"
               }`}
             >
               <item.icon
                 size={20}
                 className={`shrink-0 ${
                   isActive
-                    ? "text-teal-500"
-                    : "text-gray-500 group-hover:text-teal-500"
+                    ? "text-slate-950"
+                    : "text-gray-500 group-hover:text-slate-950"
                 }`}
               />
-              {!collapsed && (
+              {!isCollapsed && (
                 <span className="text-sm font-medium">{item.title}</span>
               )}
             </Link>
@@ -142,7 +144,8 @@ const Sidebar = () => {
         })}
       </nav>
 
-      {!collapsed && (
+      {/* Profil utilisateur — déployé */}
+      {!isCollapsed && (
         <div className="border-t border-gray-100 px-4 py-4 flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold text-gray-700 shrink-0">
             {loadingUser ? "..." : initials}
@@ -167,7 +170,8 @@ const Sidebar = () => {
         </div>
       )}
 
-      {collapsed && (
+      {/* Profil utilisateur — réduit */}
+      {isCollapsed && (
         <div className="border-t border-gray-100 px-2 py-4 flex justify-center">
           <div
             className="w-9 h-9 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold text-gray-700"

@@ -1,16 +1,16 @@
-import Sidebar from "@/components/Sidebar";
+// import Footer from '@/components/Footer';
+// import Sidebar from "@/components/Sidebar";
+import Dashboard from "@/components/dashboard_content";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout(){
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-      <main className="flex-grow ml-64 p-6 bg-gray-50 transition-all duration-300">
-        {children}
-      </main>
+    <div className="flex flex-col min-h-screen">
+      {/* <Sidebar /> */}
+      <main className="flex-grow p-6">
+        <Dashboard />
+        </main>
+
+      {/* <Footer /> */}
     </div>
   );
 }
