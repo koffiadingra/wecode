@@ -69,7 +69,7 @@ const menuItems = [
   { href: "/inventaire", title: "Inventaire", icon: Warehouse },
   { href: "/commande", title: "Commandes", icon: ShoppingCart },
   { href: "/Devis", title: "Devis", icon: FileText },
-  { href: "/Client", title: "Clients", icon: Users },
+  { href: "/Clients", title: "Clients", icon: Users },
   { href: "/analytiques", title: "Analytiques", icon: ChartColumn },
 ];
 

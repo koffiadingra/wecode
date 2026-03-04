@@ -1,6 +1,6 @@
 // import Footer from '@/components/Footer';
 // import Sidebar from "@/components/Sidebar";
-import Dashboard from "@/components/dashboard_content";
+import Dashboard from "@/components/Dashboard_content";
 
 export default function DashboardLayout(){
   return (

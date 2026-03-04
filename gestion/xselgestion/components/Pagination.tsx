@@ -5,6 +5,8 @@ import {
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
+  PaginationLink,
+  PaginationEllipsis,
 } from "@/components/ui/pagination";
 import {
   Select,
@@ -19,7 +21,7 @@ export function PaginationIconsOnly() {
   return (
     <div className="flex items-center justify-between gap-4">
       <Field orientation="horizontal" className="w-fit">
-        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+        <FieldLabel htmlFor="select-rows-per-page" className="ml-2">Lignes par page</FieldLabel>
         <Select defaultValue="25">
           <SelectTrigger className="w-20" id="select-rows-per-page">
             <SelectValue />
@@ -39,6 +41,20 @@ export function PaginationIconsOnly() {
           <PaginationItem>
             <PaginationPrevious href="#" />
           </PaginationItem>
+           <PaginationItem>
+          <PaginationLink href="#">1</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#" isActive>
+            2
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">3</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationEllipsis />
+        </PaginationItem>
           <PaginationItem>
             <PaginationNext href="#" />
           </PaginationItem>

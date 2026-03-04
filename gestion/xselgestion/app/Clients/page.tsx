@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import { X, MapPin } from "lucide-react";
 import { TableActions } from "@/components/TableUsers";
 import { PaginationIconsOnly } from "@/components/Pagination";
-import { SearchBar } from "@/components/search-bar";
-
 interface FormData {
   name: string;
   sigle: string;
@@ -603,9 +601,6 @@ export default function ClientPage() {
           </div>
         </div> */}
         <div className="p-3 bg-white rounded-2xl shadow-[0_2px_20px_-4px_rgba(0,0,0,0.04)] border border-teal-70 overflow-hidden">
-          <div className="mb-5">
-            <SearchBar />
-          </div>
           <TableActions />
           <PaginationIconsOnly />
         </div>

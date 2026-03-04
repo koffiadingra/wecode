@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
-// import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
 
 export function SearchBar() {
@@ -31,10 +30,6 @@ export function SearchBar() {
           className="pl-9"
         />
       </div>
-
-      {/* <Button type="submit">
-        OK
-      </Button> */}
     </form>
   )
 }
