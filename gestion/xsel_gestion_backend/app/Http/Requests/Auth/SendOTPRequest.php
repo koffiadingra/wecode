@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-
 class SendOTPRequest extends FormRequest
 {
     public function authorize(): bool
@@ -17,28 +16,25 @@ class SendOTPRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users,email'
+            'email' => 'required|email|max:255',
         ];
     }
 
-
-      public function messages(): array
+    public function messages(): array
     {
         return [
-            'email.required' => 'The email field is required.',
-            'email.email' => 'Please enter a valid email address.',
-            'email.exists' => 'No account found with this email address.',
+            'email.required' => "L`adresse email est requise.",
+            'email.email'    => 'Veuillez entrer une adresse email valide.',
         ];
     }
-
 
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
             response()->json([
-                'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'status'  => 'error',
+                'message' => 'Validation échouée',
+                'errors'  => $validator->errors()
             ], 422)
         );
     }

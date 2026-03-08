@@ -1,7 +1,7 @@
-version: '3.8'
 services:
   # Application Laravel (PHP-FPM)
   app:
+    user: "${UID}:${GID}"
     build:
       context: .
       dockerfile: Dockerfile
@@ -45,11 +45,10 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d xsel_gestion_backend"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d xsel_gestion_backend" ]
       interval: 5s
       timeout: 5s
       retries: 5
-
 
   adminer:
     image: adminer:latest
@@ -64,7 +63,6 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
-
 
 networks:
   app-network:

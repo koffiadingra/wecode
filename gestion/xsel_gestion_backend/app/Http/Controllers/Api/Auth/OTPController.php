@@ -13,78 +13,82 @@ use App\Services\OTPService;
 
 class OTPController extends Controller
 {
-
-    protected $otpService;
+    protected OTPService $otpService;
 
     public function __construct(OTPService $otpService)
     {
         $this->otpService = $otpService;
     }
 
-    public function sendOTP(SendOTPRequest $request)
+
+    public function sendOTP(SendOTPRequest $request): SuccessResource
     {
         $validated = $request->validated();
 
         $user = User::where('email', $validated['email'])->first();
 
-        // Generate OTP using service
+        
+        if (!$user) {
+            return new SuccessResource([
+                'message' => 'Si cet email est enregistré, vous recevrez un OTP.',
+                'data'    => [
+                    'expires_in' => $this->otpService->getExpiresInMinutes(),
+                ]
+            ]);
+        }
+
         $otpData = $this->otpService->generateOTP();
 
+        $user->update([
+            'otp'            => $otpData['otp_hash'],
+            'otp_expires_at' => $otpData['otp_expires_at'],
+        ]);
+
         try {
-            // Send OTP via Email
             SendMailJob::dispatch(
                 $user->name,
                 $user->email,
-                $otpData['otp']
+                $otpData['otp'],        
+                'verification'
             );
-
-
-            // Update user with OTP data
-            $user->update([
-                'otp' => $otpData['otp'],
-                'otp_expires_at' => $otpData['otp_expires_at']
-            ]);
-
+        } catch (\Exception $e) {
+            $this->otpService->clearOTP($user);
 
             return new SuccessResource([
-                'message' => 'OTP sent successfully to your email',
-                'data' => [
-                    'expires_in' => 10,
-                    'email' => $user->email
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return new ErrorResource([
-                'message' => 'Failed to send OTP. Please try again.',
-                'error_code' => 'EMAIL_SEND_FAILED',
-                'status_code' => 500
+                'message' => 'Une erreur est survenue. Veuillez réessayer dans quelques instants.',
             ]);
         }
+
+        return new SuccessResource([
+            'message' => 'Si cet email est enregistré, vous recevrez un OTP.',
+            'data'    => [
+                'expires_in' => $this->otpService->getExpiresInMinutes(),
+                'email'      => $user->email,
+            ]
+        ]);
     }
 
 
-    public function verifyOTP(VerifyOTPRequest $request)
+    public function verifyOTP(VerifyOTPRequest $request): SuccessResource|ErrorResource
     {
         $validated = $request->validated();
 
-         // Use email verification method for OTP verification
         $user = $this->otpService->verifyOTPAndVerifyEmail(
-              $validated['email'], 
-              $validated['otp']
-          );
+            $validated['email'],
+            $validated['otp']
+        );
 
         if (!$user) {
             return new ErrorResource([
-                'message' => 'Invalid or expired OTP',
+                'message'    => 'OTP invalide ou expiré',
                 'status_code' => 400
             ]);
         }
 
-        // Clear OTP and mark email as verified
         $this->otpService->clearOTP($user);
 
         return new SuccessResource([
-            'message' => 'OTP verified successfully'
+            'message' => 'Email vérifié avec succès'
         ]);
     }
 }

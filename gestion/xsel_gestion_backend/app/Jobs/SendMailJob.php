@@ -15,19 +15,13 @@ class SendMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $name;
-    protected $email;
-    protected $otp;
-
-
-    public function __construct($name, $email, $otp)
-    {
-        $this->name = $name;
-        $this->email = $email;
-        $this->otp = $otp;
-    }
-
-
+    
+    public function __construct(
+        protected string $name,
+        protected string $email,
+        protected string $otp,
+        protected string $purpose = 'verification'   
+    ) {}
 
     public function handle(): void
     {
@@ -35,17 +29,17 @@ class SendMailJob implements ShouldQueue
             otp: $this->otp,
             userName: $this->name,
             expiresIn: 10,
-            purpose: 'verification'
+            purpose: $this->purpose              
         ));
     }
 
     public function failed(\Throwable $exception): void
     {
-        Log::error('SendMailJob failed: ' . $exception->getMessage());
-        Log::error('Exception details: ', [
-            'file' => $exception->getFile(),
-            'line' => $exception->getLine(),
-            'trace' => $exception->getTraceAsString()
+        Log::error('SendMailJob failed', [
+            'email'   => $this->email,
+            'message' => $exception->getMessage(),
+            'file'    => $exception->getFile(),
+            'line'    => $exception->getLine(),
         ]);
     }
 }

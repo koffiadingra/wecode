@@ -10,83 +10,84 @@ use App\Http\Resources\SuccessResource;
 use App\Jobs\SendMailJob;
 use App\Models\User;
 use App\Services\OTPService;
-// use Illuminate\Support\Carbon;
-// use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 
 class PasswordResetController extends Controller
 {
-
-    protected $otpService;
+    protected OTPService $otpService;
 
     public function __construct(OTPService $otpService)
     {
         $this->otpService = $otpService;
     }
 
-
-    public function forgotPassword(SendOTPRequest $request)
+    
+    public function forgotPassword(SendOTPRequest $request): SuccessResource|ErrorResource
     {
         $validated = $request->validated();
 
         $user = User::where('email', $validated['email'])->first();
 
-        // Generate OTP using service
         $otpData = $this->otpService->generateOTP();
 
+        $user->update([
+            'otp'            => $otpData['otp_hash'],
+            'otp_expires_at' => $otpData['otp_expires_at'],
+        ]);
+
         try {
-            // Send OTP via Email
             SendMailJob::dispatch(
                 $user->name,
                 $user->email,
-                $otpData['otp']
+                $otpData['otp'],
+                'password_reset'
             );
-
-            $user->update([
-                'otp' => $otpData['otp'],
-                'otp_expires_at' => $otpData['otp_expires_at']
-            ]);
-
-            return new SuccessResource([
-                'message' => 'OTP sent successfully to your email',
-                'data' => [
-                    'expires_in' => 10,
-                    'email' => $user->email
-                ]
-            ]);
         } catch (\Exception $e) {
+            $this->otpService->clearOTP($user);
+
             return new ErrorResource([
-                'message' => 'Failed to send OTP. Please try again.',
+                'message'    => 'Échec de l\'envoi de l\'email. Veuillez réessayer.',
                 'error_code' => 'EMAIL_SEND_FAILED',
                 'status_code' => 500
             ]);
         }
+
+        return new SuccessResource([
+            'message' => 'OTP envoyé avec succès sur votre adresse email',
+            'data'    => [
+                'expires_in' => $this->otpService->getExpiresInMinutes(),
+                'email'      => $user->email,
+            ]
+        ]);
     }
 
-    public function resetPassword(ResetPasswordRequest $request)
+
+    public function resetPassword(ResetPasswordRequest $request): SuccessResource|ErrorResource
     {
         $validated = $request->validated();
 
-  // Use basic OTP verification for password reset (no email verification)
         $user = $this->otpService->verifyOTP(
             $validated['email'],
             $validated['otp']
         );
 
-
         if (!$user) {
             return new ErrorResource([
-                'message' => 'Invalid or expired OTP',
+                'message'    => 'OTP invalide ou expiré',
                 'status_code' => 400
             ]);
         }
 
-        // Clear OTP and mark email as verified
         $this->otpService->clearOTP($user);
+
+        $user->update([
+            'password' => Hash::make($validated['password']),
+        ]);
 
         $user->tokens()->delete();
 
         return new SuccessResource([
-            'message' => 'Password reset successfully'
+            'message' => 'Mot de passe réinitialisé avec succès. Veuillez vous reconnecter.'
         ]);
     }
 }

@@ -1,10 +1,10 @@
 <?php
+
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
 
 class ResetPasswordRequest extends FormRequest
 {
@@ -17,37 +17,34 @@ class ResetPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'    => 'required|email|exists:users,email',
+            'email'    => 'required|email|max:255',
             'otp'      => 'required|digits:6',
             'password' => 'required|string|min:8|confirmed',
         ];
     }
 
-
     public function messages(): array
     {
         return [
-            'email.required' => 'The email field is required.',
-            'email.email' => 'Please enter a valid email address.',
-            'email.exists' => 'No account found with this email address.',
+            'email.required'       => 'L\'adresse email est requise.',
+            'email.email'          => 'Veuillez entrer une adresse email valide.',
 
-            'password.required' => 'The password field is required.',
-            'password.min' => 'The password must be at least 8 characters.',
-            'password.confirmed' => 'Password confirmation does not match.',
+            'otp.required'         => 'Le code OTP est requis.',
+            'otp.digits'           => 'Le code OTP doit contenir exactement 6 chiffres.',
 
-            'otp.required' => 'OTP code is required.',
-            'otp.digits' => 'OTP code must be exactly 6 digits.',
+            'password.required'    => 'Le mot de passe est requis.',
+            'password.min'         => 'Le mot de passe doit contenir au moins 8 caractères.',
+            'password.confirmed'   => 'La confirmation du mot de passe ne correspond pas.',
         ];
     }
-
 
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
             response()->json([
-                'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'status'  => 'error',
+                'message' => 'Validation échouée',
+                'errors'  => $validator->errors()
             ], 422)
         );
     }

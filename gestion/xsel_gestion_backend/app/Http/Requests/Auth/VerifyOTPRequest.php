@@ -13,37 +13,32 @@ class VerifyOTPRequest extends FormRequest
         return true;
     }
 
+
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users,email',
-            'otp' => 'required|digits:6'
+            'email' => 'required|email|max:255',
+            'otp'   => 'required|digits:6',
         ];
     }
-
 
     public function messages(): array
     {
         return [
-            // Email field messages
-            'email.required' => 'Email address is required.',
-            'email.email' => 'Please provide a valid email address.',
-            'email.exists' => 'This email address is not registered in our system.',
-
-            // OTP field messages
-            'otp.required' => 'OTP code is required.',
-            'otp.digits' => 'OTP code must be exactly 6 digits.',
+            'email.required' => 'L\'adresse email est requise.',
+            'email.email'    => 'Veuillez entrer une adresse email valide.',
+            'otp.required'   => 'Le code OTP est requis.',
+            'otp.digits'     => 'Le code OTP doit contenir exactement 6 chiffres.',
         ];
     }
-
 
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
             response()->json([
-                'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'status'  => 'error',
+                'message' => 'Validation échouée',
+                'errors'  => $validator->errors()
             ], 422)
         );
     }
