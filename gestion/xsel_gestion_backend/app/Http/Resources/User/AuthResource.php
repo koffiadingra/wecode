@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Resources\User;
+
+use App\Http\Resources\User\UserResource;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class AuthResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'user' => new UserResource($this['user']),
+            'access_token' => $this['token'],
+            'token_type' => $this['token_type'] ?? 'Bearer',
+        ];
+    }
+}
